@@ -1,0 +1,8 @@
+total 0
+-rw-rw-r-- 1 cs1 cs1 0 Sep  3 15:50 mydir.txt
+-rw-rw-r-- 1 cs1 cs1 0 Sep  2 11:29 practice.py
+.
+..
+mydir.txt
+practice.py
+Hello!
