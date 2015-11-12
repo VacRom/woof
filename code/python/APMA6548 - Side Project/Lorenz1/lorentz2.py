@@ -4,8 +4,8 @@ imgx = 800
 imgy = 600
 image = Image.new("RGB", (imgx, imgy))
 
-maxIt = 60000
-frame = 500
+maxIt = 20000
+frame = 250
 maxPic = int(maxIt//frame)
 size = 30
 xa = -size
@@ -48,7 +48,7 @@ for i in range(maxIt):
         image.putpixel((xi, yi), (255, 100, 100))
     if n == int(n):
         name = str(n)
-        image.save(name, "BMP")
+        image.save(name, "JPEG")
     if n == maxPic:
         quit
     if type(i/frame) == int:
