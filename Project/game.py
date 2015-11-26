@@ -61,14 +61,13 @@ screen_y = 800
 screen = pg.display.set_mode([screen_x, screen_y])
 pg.display.set_caption('Project')
 
-all_sprites = pg.sprite.Group()
 all_walls = pg.sprite.Group()
 all_backgrounds = pg.sprite.Group()
+all_sprites = pg.sprite.Group()
 
 'Generates the background.'
 floor = Background(0, 0, 800, 600, colors.BROWN)
 all_backgrounds.add(floor)
-all_sprites.add(floor)
 
 'Generates the stage.'
 wall = Wall(0, 0, 10, 600)
@@ -123,58 +122,9 @@ while not done:
 
     all_sprites.update()
     screen.fill(colors.BLACK)
+    all_backgrounds.draw(screen)
     all_sprites.draw(screen)
     pg.display.flip()
     clock.tick(120)
 
 pg.quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
