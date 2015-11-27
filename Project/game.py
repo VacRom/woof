@@ -28,12 +28,8 @@ class Wall(pg.sprite.Sprite):
     def update(self):
         global hitWall
         global hitPosWall
-        global all_walls
-        global all_backgrounds
         global dx
         global dy
-        test_walls = all_walls
-        test_backgrounds = all_backgrounds
         self.rect.x += dx
         self.rect.y += dy
         checkWall = pg.sprite.spritecollide(self, all_actors, False)
@@ -47,9 +43,6 @@ class Wall(pg.sprite.Sprite):
                 hitPosWall = 'Left'
             if dx < 0:
                 hitPosWall = 'Right'
-        if hitWall is True:
-            all_walls = test_walls
-            all_backgrounds = test_backgrounds
         if hitWall is not True:
             hitPosWall = ''
 
@@ -119,22 +112,20 @@ while not done:
             done = True
 
     if hitWall is False:
-        if event.type == pg.KEYDOWN:
-            if event.key == pg.K_LEFT:
-                dx = 2
-            elif event.key == pg.K_RIGHT:
-                dx = -2
-            elif event.key == pg.K_UP:
-                dy = 2
-            elif event.key == pg.K_DOWN:
-                dy = -2
-        if event.type == pg.KEYUP:
-            if event.key == pg.K_LEFT or event.key == pg.K_RIGHT:
-                dx = 0
-            if event.key == pg.K_UP or event.key == pg.K_DOWN:
-                dy = 0
-        hitPosWall = ''
-    elif hitWall is True:
+        if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
+            dx = 0
+        if pg.key.get_pressed()[pg.K_UP] is 0 or pg.key.get_pressed()[pg.K_DOWN] is 0:
+            dy = 0
+        if pg.key.get_pressed()[pg.K_LEFT] is 1:
+            dx = 2
+        if pg.key.get_pressed()[pg.K_RIGHT] is 1:
+            dx = -2
+        if pg.key.get_pressed()[pg.K_UP] is 1:
+            dy = 2
+        if pg.key.get_pressed()[pg.K_DOWN] is 1:
+            dy = -2
+       
+    else:
         if hitPosWall is 'Top':
             dy = -2
             dx = -dx
@@ -148,6 +139,7 @@ while not done:
             dx = -2
             dy = -dy
         hitWall = False
+        hitPosWall = ''
 
     all_walls.update()
     all_backgrounds.update()
@@ -158,5 +150,5 @@ while not done:
 
     pg.display.flip()
     clock.tick(60)
-    print(hitWall, hitPosWall, dx, dy)
+    print('Up', pg.key.get_pressed()[pg.K_UP], 'Right', pg.key.get_pressed()[pg.K_RIGHT], 'Down', pg.key.get_pressed()[pg.K_DOWN], 'Left', pg.key.get_pressed()[pg.K_LEFT])
 pg.quit()
