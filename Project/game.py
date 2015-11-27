@@ -1,7 +1,7 @@
 import pygame as pg
 import colors
 
-'Define the Actor as your character.'
+
 class Actor(pg.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
@@ -13,15 +13,9 @@ class Actor(pg.sprite.Sprite):
         self.walls = None
 
     def update(self):
-        global dx
-        global dy
         global hitWall
-        hitbox = pg.sprite.spritecollide(self, all_walls, False)
-        for wall in hitbox:
-            if dx != 0 or dy != 0:
-                hitWall = True
 
-'Define a Wall as an inanimate object that blocks Actors.'
+
 class Wall(pg.sprite.Sprite):
     def __init__(self, x, y, width, height):
         super().__init__()
@@ -30,11 +24,36 @@ class Wall(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
     def update(self):
+        global hitWall
+        global hitPosWall
+        global all_walls
+        global all_backgrounds
+        global dx
+        global dy
+        test_walls = all_walls
+        test_backgrounds = all_backgrounds
         self.rect.x += dx
         self.rect.y += dy
-       
-'Define the Background as inanimate objects that do not block Actors'
+        checkWall = pg.sprite.spritecollide(self, all_actors, False)
+        for player in checkWall:
+            hitWall = True
+            if dy > 0:
+                hitPosWall = 'Top'
+            if dy < 0:
+                hitPosWall = 'Bottom'
+            if dx > 0:
+                hitPosWall = 'Left'
+            if dx < 0:
+                hitPosWall = 'Right'
+        if hitWall is True:
+            all_walls = test_walls
+            all_backgrounds = test_backgrounds
+        if hitWall is not True:
+            hitPosWall = ''
+
+
 class Background(pg.sprite.Sprite):
     def __init__(self, x, y, width, height, color):
         super().__init__()
@@ -43,9 +62,10 @@ class Background(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
     def update(self):
-        self.rect.x += dx
-        self.rect.y += dy
+            self.rect.x += dx
+            self.rect.y += dy
 
 pg.init()
 
@@ -54,6 +74,7 @@ screen_y = 600
 dx = 0
 dy = 0
 hitWall = False
+hitPosWall = ''
 screen = pg.display.set_mode([screen_x, screen_y])
 pg.display.set_caption('Project')
 
@@ -96,7 +117,8 @@ while not done:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             done = True
-    if hitWall == False:
+
+    if hitWall is False:
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_LEFT:
                 dx = 2
@@ -106,28 +128,35 @@ while not done:
                 dy = 2
             elif event.key == pg.K_DOWN:
                 dy = -2
-        elif event.type != pg.KEYDOWN:
-            hitWall = False
-
         if event.type == pg.KEYUP:
-            if event.key == pg.K_LEFT:
+            if event.key == pg.K_LEFT or event.key == pg.K_RIGHT:
                 dx = 0
-            elif event.key == pg.K_RIGHT:
-                dx = 0
-            elif event.key == pg.K_UP:
+            if event.key == pg.K_UP or event.key == pg.K_DOWN:
                 dy = 0
-            elif event.key == pg.K_DOWN:
-                dy = 0
+        hitPosWall = ''
+    elif hitWall is True:
+        if hitPosWall is 'Top':
+            dy = -2
+            dx = -dx
+        if hitPosWall is 'Right':
+            dx = 2
+            dy = -dy
+        if hitPosWall is 'Bottom':
+            dy = 2
+            dx = -dx
+        if hitPosWall is 'Left':
+            dx = -2
+            dy = -dy
+        hitWall = False
 
     all_walls.update()
-    all_actors.update()
     all_backgrounds.update()
     screen.fill(colors.BLACK)
     all_backgrounds.draw(screen)
-    all_sprites.draw(screen)
+    all_walls.draw(screen)
+    all_actors.draw(screen)
 
     pg.display.flip()
     clock.tick(60)
-    print(hitWall, dx, dy)
+    print(hitWall, hitPosWall, dx, dy)
 pg.quit()
-
