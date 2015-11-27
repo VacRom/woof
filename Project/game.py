@@ -8,31 +8,22 @@ class Actor(pg.sprite.Sprite):
         self.image = pg.Surface([15, 15])
         self.image.fill(colors.RED)
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.vel_x = 0
-        self.vel_y = 0
+        self.rect.x = 400
+        self.rect.y = 300
         self.walls = None
 
-    def changevel(self, x, y):
-        self.vel_x += x
-        self.vel_y += y
-
     def update(self):
-        self.rect.x += self.vel_x
-        all_blocks = pg.sprite.spritecollide(self, self.walls, False)
-        for block in all_blocks:
-            if self.vel_x > 0:
-                self.rect.right = block.rect.left
-            else:
-                self.rect.left = block.rect.right
-        self.rect.y += self.vel_y
-        all_blocks = pg.sprite.spritecollide(self, self.walls, False)
-        for block in all_blocks:
-            if self.vel_y > 0:
-                self.rect.bottom = block.rect.top
-            else:
-                self.rect.top = block.rect.bottom
+        global dx
+        global dy
+        hitbox = pg.sprite.spritecollide(self, all_walls, False)
+        for wall in hitbox:
+            if dx != 0:
+                dx = -dx
+
+        hitbox = pg.sprite.spritecollide(self, all_walls, False)
+        for wall in hitbox:
+            if dy != 0:
+                dy = -dy
 
 'Define a Wall as an inanimate object that blocks Actors.'
 class Wall(pg.sprite.Sprite):
@@ -43,6 +34,9 @@ class Wall(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+    def update(self):
+        self.rect.x += dx
+        self.rect.y += dy
 
 'Define the Background as inanimate objects that do not block Actors'
 class Background(pg.sprite.Sprite):
@@ -53,11 +47,14 @@ class Background(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+    def update(self):
+        self.rect.x += dx
+        self.rect.y += dy
 
 pg.init()
 
-screen_x = 1200
-screen_y = 800
+screen_x = 800
+screen_y = 600
 screen = pg.display.set_mode([screen_x, screen_y])
 pg.display.set_caption('Project')
 
@@ -66,8 +63,9 @@ all_backgrounds = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
 
 'Generates the background.'
-floor = Background(0, 0, 800, 600, colors.BROWN)
+floor = Background(10, 10, 780, 580, colors.BROWN)
 all_backgrounds.add(floor)
+all_sprites.add(floor)
 
 'Generates the stage.'
 wall = Wall(0, 0, 10, 600)
@@ -87,8 +85,7 @@ all_walls.add(wall)
 all_sprites.add(wall)
 
 'Generates actors.'
-player = Actor(50, 50)
-player.walls = all_walls
+player = Actor(400, 300)
 all_sprites.add(player)
 
 clock = pg.time.Clock()
@@ -102,29 +99,63 @@ while not done:
 
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_LEFT:
-                player.changevel(-2, 0)
+                dx = 2
             elif event.key == pg.K_RIGHT:
-                player.changevel(2, 0)
+                dx = -2
             elif event.key == pg.K_UP:
-                player.changevel(0, -2)
+                dy = 2
             elif event.key == pg.K_DOWN:
-                player.changevel(0, 2)
+                dy = -2
 
         elif event.type == pg.KEYUP:
             if event.key == pg.K_LEFT:
-                player.changevel(2, 0)
+                dx = 0
             elif event.key == pg.K_RIGHT:
-                player.changevel(-2, 0)
+                dx = 0
             elif event.key == pg.K_UP:
-                player.changevel(0, 2)
+                dy = 0
             elif event.key == pg.K_DOWN:
-                player.changevel(0, -2)
+                dy = 0
 
     all_sprites.update()
     screen.fill(colors.BLACK)
-    all_backgrounds.draw(screen)
     all_sprites.draw(screen)
-    pg.display.flip()
-    clock.tick(120)
 
+    pg.display.flip()
+    clock.tick(60)
+    print(player.rect.x, player.rect.y)
 pg.quit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
