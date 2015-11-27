@@ -15,15 +15,11 @@ class Actor(pg.sprite.Sprite):
     def update(self):
         global dx
         global dy
+        global hitWall
         hitbox = pg.sprite.spritecollide(self, all_walls, False)
         for wall in hitbox:
-            if dx != 0:
-                dx = -dx
-
-        hitbox = pg.sprite.spritecollide(self, all_walls, False)
-        for wall in hitbox:
-            if dy != 0:
-                dy = -dy
+            if dx != 0 or dy != 0:
+                hitWall = True
 
 'Define a Wall as an inanimate object that blocks Actors.'
 class Wall(pg.sprite.Sprite):
@@ -37,7 +33,7 @@ class Wall(pg.sprite.Sprite):
     def update(self):
         self.rect.x += dx
         self.rect.y += dy
-
+       
 'Define the Background as inanimate objects that do not block Actors'
 class Background(pg.sprite.Sprite):
     def __init__(self, x, y, width, height, color):
@@ -55,17 +51,20 @@ pg.init()
 
 screen_x = 800
 screen_y = 600
+dx = 0
+dy = 0
+hitWall = False
 screen = pg.display.set_mode([screen_x, screen_y])
 pg.display.set_caption('Project')
 
 all_walls = pg.sprite.Group()
 all_backgrounds = pg.sprite.Group()
+all_actors = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
 
 'Generates the background.'
 floor = Background(10, 10, 780, 580, colors.BROWN)
 all_backgrounds.add(floor)
-all_sprites.add(floor)
 
 'Generates the stage.'
 wall = Wall(0, 0, 10, 600)
@@ -86,6 +85,7 @@ all_sprites.add(wall)
 
 'Generates actors.'
 player = Actor(400, 300)
+all_actors.add(player)
 all_sprites.add(player)
 
 clock = pg.time.Clock()
@@ -96,8 +96,8 @@ while not done:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             done = True
-
-        elif event.type == pg.KEYDOWN:
+    if hitWall == False:
+        if event.type == pg.KEYDOWN:
             if event.key == pg.K_LEFT:
                 dx = 2
             elif event.key == pg.K_RIGHT:
@@ -106,8 +106,10 @@ while not done:
                 dy = 2
             elif event.key == pg.K_DOWN:
                 dy = -2
+        elif event.type != pg.KEYDOWN:
+            hitWall = False
 
-        elif event.type == pg.KEYUP:
+        if event.type == pg.KEYUP:
             if event.key == pg.K_LEFT:
                 dx = 0
             elif event.key == pg.K_RIGHT:
@@ -117,45 +119,15 @@ while not done:
             elif event.key == pg.K_DOWN:
                 dy = 0
 
-    all_sprites.update()
+    all_walls.update()
+    all_actors.update()
+    all_backgrounds.update()
     screen.fill(colors.BLACK)
+    all_backgrounds.draw(screen)
     all_sprites.draw(screen)
 
     pg.display.flip()
     clock.tick(60)
-    print(player.rect.x, player.rect.y)
+    print(hitWall, dx, dy)
 pg.quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
