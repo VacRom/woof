@@ -17,10 +17,10 @@ class Actor(pg.sprite.Sprite):
 
 
 class Wall(pg.sprite.Sprite):
-    def __init__(self, x, y, width, height):
+    def __init__(self, x, y, width, height, color):
         super().__init__()
         self.image = pg.Surface([width, height])
-        self.image.fill(colors.BROWN_0)
+        self.image.fill(color)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -57,11 +57,20 @@ class Background(pg.sprite.Sprite):
         self.rect.y = y
 
     def update(self):
-            self.rect.x += dx
-            self.rect.y += dy
+        self.rect.x += dx
+        self.rect.y += dy
 
 pg.init()
 
+all_walls = pg.sprite.Group()
+all_backgrounds = pg.sprite.Group()
+all_actors = pg.sprite.Group()
+all_sprites = pg.sprite.Group()
+
+player = Actor(400, 300)
+all_actors.add(player)
+
+t = 0
 screen_x = 800
 screen_y = 600
 dx = 0
@@ -71,37 +80,24 @@ hitPosWall = ''
 screen = pg.display.set_mode([screen_x, screen_y])
 pg.display.set_caption('Project')
 
-all_walls = pg.sprite.Group()
-all_backgrounds = pg.sprite.Group()
-all_actors = pg.sprite.Group()
-all_sprites = pg.sprite.Group()
-
-'Generates the background.'
 floor = Background(10, 10, 780, 580, colors.BROWN)
 all_backgrounds.add(floor)
 
-'Generates the stage.'
-wall = Wall(0, 0, 10, 600)
+wall = Wall(0, 0, 10, 600, colors.BROWN_0)
 all_walls.add(wall)
 all_sprites.add(wall)
 
-wall = Wall(10, 0, 790, 10)
+wall = Wall(10, 0, 790, 10, colors.BROWN_0)
 all_walls.add(wall)
 all_sprites.add(wall)
 
-wall = Wall(790, 10, 10, 590)
+wall = Wall(790, 10, 10, 590, colors.BROWN_0)
 all_walls.add(wall)
 all_sprites.add(wall)
 
-wall = Wall(10, 590, 790, 10)
+wall = Wall(10, 590, 790, 10, colors.BROWN_0)
 all_walls.add(wall)
 all_sprites.add(wall)
-
-'Generates actors.'
-player = Actor(400, 300)
-all_actors.add(player)
-all_sprites.add(player)
-
 clock = pg.time.Clock()
 done = False
 
@@ -124,7 +120,7 @@ while not done:
             dy = 2
         if pg.key.get_pressed()[pg.K_DOWN] is 1:
             dy = -2
-       
+
     else:
         if hitPosWall is 'Top':
             dy = -2
@@ -150,5 +146,6 @@ while not done:
 
     pg.display.flip()
     clock.tick(60)
-    print('Up', pg.key.get_pressed()[pg.K_UP], 'Right', pg.key.get_pressed()[pg.K_RIGHT], 'Down', pg.key.get_pressed()[pg.K_DOWN], 'Left', pg.key.get_pressed()[pg.K_LEFT])
+    t += 1
+    print(t)
 pg.quit()
