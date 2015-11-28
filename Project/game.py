@@ -17,7 +17,7 @@ class Actor(pg.sprite.Sprite):
 
 
 class TextBox(pg.sprite.Sprite):
-    def __init__(self, x, y, color):
+    def __init__(self, color):
         super().__init__()
         self.image = pg.Surface([2*margins, 75])
         self.image.fill(color)
@@ -31,7 +31,7 @@ class TextBox(pg.sprite.Sprite):
 
 
 class TextBorder(pg.sprite.Sprite):
-    def __init__(self, x, y, color):
+    def __init__(self, color):
         super().__init__()
         self.image = pg.Surface([2*margins+10, 75+10])
         self.image.fill(color)
@@ -42,7 +42,7 @@ class TextBorder(pg.sprite.Sprite):
 
     def update(self):
         pass
-    
+
 
 class Wall(pg.sprite.Sprite):
     def __init__(self, x, y, width, height, color):
@@ -232,33 +232,45 @@ all_walls = pg.sprite.Group()
 all_backgrounds = pg.sprite.Group()
 all_actors = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
-all_text = pg.sprite.Group()
 all_textBorder = pg.sprite.Group()
+all_textBox = pg.sprite.Group()
+all_text = []
 
 t = 0
 screen_x = 1280
 screen_y = 720
+initial_x = 80
+initial_y = 30
+player_size = 25
+mainFont = pg.font.SysFont('monospace', 15)
+secondFont = pg.font.SysFont('monospace', 12)
+textBoxState = False
+
 center_x = int(screen_x/2)
 center_y = int(screen_y/2)
 margins = int((screen_x-200)/2)
-player_size = 25
 player_center = int(player_size/2)
-player = Actor(center_x-player_center, center_y-player_center)
-all_actors.add(player)
-textBorder = TextBorder(0, 0, colors.RED_4)
-all_textBorder.add(textBorder)
-text = TextBox(0, 0, colors.BLACK)
-all_text.add(text)
-initial_x = 80
-initial_y = 30
 offset_x = initial_x-center_x
 offset_y = initial_y-center_y
+
+player = Actor(center_x-player_center, center_y-player_center)
+all_actors.add(player)
+
+textBorder = TextBorder(colors.BLUE_0)
+all_textBorder.add(textBorder)
+
+textBox = TextBox(colors.BLACK)
+all_textBox.add(textBox)
+
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME)
+pg.display.set_caption('Project')
+
+text1 = mainFont.render('Hello!', 1, colors.RED)
+
 dx = 0
 dy = 0
 hitWall = False
 hitPosWall = ''
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME)
-pg.display.set_caption('Project')
 
 'Starting office'
 Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'end_3')
@@ -293,6 +305,11 @@ while not done:
         if event.type == pg.QUIT:
             done = True
 
+    if pg.key.get_pressed()[pg.K_t] is 1:
+        textBoxState = True
+    elif pg.key.get_pressed()[pg.K_t] is 0:
+        textBoxState = False
+
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
             dx = 0
@@ -326,14 +343,18 @@ while not done:
     all_walls.update()
     all_backgrounds.update()
     all_actors.update()
-    all_text.update()
     all_textBorder.update()
+    all_textBox.update()
+
     screen.fill(colors.BLACK)
     all_backgrounds.draw(screen)
     all_walls.draw(screen)
     all_actors.draw(screen)
-    all_textBorder.draw(screen)
-    all_text.draw(screen)
+
+    if textBoxState is True:
+        all_textBorder.draw(screen)
+        all_textBox.draw(screen)
+        screen.blit(text1, (200, 200))
 
     pg.display.flip()
     clock.tick(60)
