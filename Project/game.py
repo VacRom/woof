@@ -44,6 +44,16 @@ class TextBorder(pg.sprite.Sprite):
         pass
 
 
+class Text():
+    def mkText(text, font, color, size, row):
+        row = row*15
+        text = [mainFont.render(text, 1, color), center_x-margins+3, screen_y-165+row+3]
+        all_text.append(text)
+
+    def update():
+        pass
+
+
 class Wall(pg.sprite.Sprite):
     def __init__(self, x, y, width, height, color):
         super().__init__()
@@ -237,13 +247,13 @@ all_textBox = pg.sprite.Group()
 all_text = []
 
 t = 0
-screen_x = 1280
-screen_y = 720
+screen_x = 800
+screen_y = 600
 initial_x = 80
 initial_y = 30
 player_size = 25
-mainFont = pg.font.SysFont('monospace', 15)
-secondFont = pg.font.SysFont('monospace', 12)
+mainFont = pg.font.SysFont('monospace', 18)
+secondFont = pg.font.SysFont('monospace', 15)
 textBoxState = False
 
 center_x = int(screen_x/2)
@@ -264,8 +274,6 @@ all_textBox.add(textBox)
 
 screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME)
 pg.display.set_caption('Project')
-
-text1 = mainFont.render('Hello!', 1, colors.RED)
 
 dx = 0
 dy = 0
@@ -292,7 +300,6 @@ Build.mkRoom(100, 145, 15, 800, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
 Build.mkRoom(-50, 145, 15, 115, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
 Build.mkRoom(0, 145, 15, 160, 80, colors.BROWN_0, colors.BROWN, 'wall_3')
 
-
 clock = pg.time.Clock()
 done = False
 
@@ -306,9 +313,11 @@ while not done:
             done = True
 
     if pg.key.get_pressed()[pg.K_t] is 1:
-        textBoxState = True
-    elif pg.key.get_pressed()[pg.K_t] is 0:
-        textBoxState = False
+        all_text = []
+        Text.mkText('Hello!', mainFont, colors.RED_2, 18, 1)
+        Text.mkText('This is a text generator!', mainFont, colors.RED_2, 18, 2)
+    if pg.key.get_pressed()[pg.K_u] is 1:
+        all_text = []
 
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
@@ -345,19 +354,21 @@ while not done:
     all_actors.update()
     all_textBorder.update()
     all_textBox.update()
+    Text.update()
 
     screen.fill(colors.BLACK)
     all_backgrounds.draw(screen)
     all_walls.draw(screen)
     all_actors.draw(screen)
 
-    if textBoxState is True:
+    if len(all_text) != 0:
         all_textBorder.draw(screen)
         all_textBox.draw(screen)
-        screen.blit(text1, (200, 200))
+        for n in range(len(all_text)):
+            screen.blit(all_text[n][0], (all_text[n][1], all_text[n][2]))
 
     pg.display.flip()
     clock.tick(60)
     t += 1
-
+    print(all_text)
 pg.quit()
