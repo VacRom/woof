@@ -13,8 +13,36 @@ class Actor(pg.sprite.Sprite):
         self.walls = None
 
     def update(self):
-        global hitWall
+        pass
 
+
+class TextBox(pg.sprite.Sprite):
+    def __init__(self, x, y, color):
+        super().__init__()
+        self.image = pg.Surface([2*margins, 75])
+        self.image.fill(color)
+        self.rect = self.image.get_rect()
+        self.rect.x = center_x-margins
+        self.rect.y = screen_y-150
+        self.wall = None
+
+    def update(self):
+        pass
+
+
+class TextBorder(pg.sprite.Sprite):
+    def __init__(self, x, y, color):
+        super().__init__()
+        self.image = pg.Surface([2*margins+10, 75+10])
+        self.image.fill(color)
+        self.rect = self.image.get_rect()
+        self.rect.x = center_x-margins-5
+        self.rect.y = screen_y-150-5
+        self.wall = None
+
+    def update(self):
+        pass
+    
 
 class Wall(pg.sprite.Sprite):
     def __init__(self, x, y, width, height, color):
@@ -204,16 +232,23 @@ all_walls = pg.sprite.Group()
 all_backgrounds = pg.sprite.Group()
 all_actors = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
+all_text = pg.sprite.Group()
+all_textBorder = pg.sprite.Group()
 
 t = 0
 screen_x = 1280
 screen_y = 720
 center_x = int(screen_x/2)
 center_y = int(screen_y/2)
+margins = int((screen_x-200)/2)
 player_size = 25
 player_center = int(player_size/2)
 player = Actor(center_x-player_center, center_y-player_center)
 all_actors.add(player)
+textBorder = TextBorder(0, 0, colors.RED_4)
+all_textBorder.add(textBorder)
+text = TextBox(0, 0, colors.BLACK)
+all_text.add(text)
 initial_x = 80
 initial_y = 30
 offset_x = initial_x-center_x
@@ -239,7 +274,6 @@ Build.mkRoom(0, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
 Build.mkRoom(200, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
 Build.mkRoom(400, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
 Build.mkRoom(600, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
-
 
 'Hallway'
 Build.mkRoom(100, 145, 15, 800, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
@@ -292,13 +326,17 @@ while not done:
     all_walls.update()
     all_backgrounds.update()
     all_actors.update()
+    all_text.update()
+    all_textBorder.update()
     screen.fill(colors.BLACK)
     all_backgrounds.draw(screen)
     all_walls.draw(screen)
     all_actors.draw(screen)
+    all_textBorder.draw(screen)
+    all_text.draw(screen)
 
     pg.display.flip()
     clock.tick(60)
     t += 1
-    print(t)
+
 pg.quit()
