@@ -5,11 +5,11 @@ import colors
 class Actor(pg.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pg.Surface([15, 15])
+        self.image = pg.Surface([25, 25])
         self.image.fill(colors.RED)
         self.rect = self.image.get_rect()
-        self.rect.x = 400
-        self.rect.y = 300
+        self.rect.x = 400-13
+        self.rect.y = 300-13
         self.walls = None
 
     def update(self):
@@ -60,6 +60,109 @@ class Background(pg.sprite.Sprite):
         self.rect.x += dx
         self.rect.y += dy
 
+
+class Build():
+    def mkRoom(x, y, t, w, h, wallColor, floorColor, version):
+        if version is 'box':
+            wallTop = Wall(x, y, w, t, wallColor)
+            wallLeft = Wall(x, y, t, h, wallColor)
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            wallBottom = Wall(x, y+h-t, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallTop)
+            all_walls.add(wallLeft)
+            all_walls.add(wallRight)
+            all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
+        if version is 'hall_1':
+            wallLeft = Wall(x, y, t, h, wallColor)
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallLeft)
+            all_walls.add(wallRight)
+            all_backgrounds.add(floor)
+
+        if version is 'hall_2':
+            wallTop = Wall(x, y, w, t, wallColor)
+            wallBottom = Wall(x, y+h-t, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallTop)
+            all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
+        if version is 'corner_1':
+            wallTop = Wall(x, y, w, t, wallColor)
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallTop)
+            all_walls.add(wallRight)
+            all_backgrounds.add(floor)
+
+        if version is 'corner_2':
+            wallTop = Wall(x, y, w, t, wallColor)
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallTop)
+            all_walls.add(wallRight)
+            all_backgrounds.add(floor)
+
+        if version is 'corner_3':
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            wallBottom = Wall(x, y+h-t, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallRight)
+            all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
+        if version is 'corner_4':
+            wallLeft = Wall(x, y, t, h, wallColor)
+            wallBottom = Wall(x, y+h-t, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallLeft)
+            all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
+        if version is 'end_1':
+            wallLeft = Wall(x, y, t, h, wallColor)
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            wallBottom = Wall(x, y+h-t, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallLeft)
+            all_walls.add(wallRight)
+            all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
+        if version is 'end_2':
+            wallTop = Wall(x, y, w, t, wallColor)
+            wallLeft = Wall(x, y, t, h, wallColor)
+            wallBottom = Wall(x, y+h-t, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallTop)
+            all_walls.add(wallLeft)
+            all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
+        if version is 'end_3':
+            wallTop = Wall(x, y, w, t, wallColor)
+            wallLeft = Wall(x, y, t, h, wallColor)
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallTop)
+            all_walls.add(wallLeft)
+            all_walls.add(wallRight)
+            all_backgrounds.add(floor)
+
+        if version is 'end_4':
+            wallTop = Wall(x, y, w, t, wallColor)
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            wallBottom = Wall(x, y+h-t, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallTop)
+            all_walls.add(wallRight)
+            all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
 pg.init()
 
 all_walls = pg.sprite.Group()
@@ -67,7 +170,7 @@ all_backgrounds = pg.sprite.Group()
 all_actors = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
 
-player = Actor(400, 300)
+player = Actor(400-12, 300-12)
 all_actors.add(player)
 
 t = 0
@@ -80,24 +183,22 @@ hitPosWall = ''
 screen = pg.display.set_mode([screen_x, screen_y])
 pg.display.set_caption('Project')
 
-floor = Background(10, 10, 780, 580, colors.BROWN)
-all_backgrounds.add(floor)
+Build.mkRoom(0, 0, 10, 100, 100, colors.RED_1, colors.BLUE, 'box')
+Build.mkRoom(0, 200, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'hall_1')
+Build.mkRoom(200, 200, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'hall_2')
+Build.mkRoom(0, 400, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'corner_1')
+Build.mkRoom(200, 400, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'corner_2')
+Build.mkRoom(400, 400, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'corner_3')
+Build.mkRoom(600, 400, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'corner_4')
+Build.mkRoom(0, 600, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'end_1')
+Build.mkRoom(200, 600, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'end_2')
+Build.mkRoom(400, 600, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'end_3')
+Build.mkRoom(600, 600, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'end_4')
 
-wall = Wall(0, 0, 10, 600, colors.BROWN_0)
-all_walls.add(wall)
-all_sprites.add(wall)
 
-wall = Wall(10, 0, 790, 10, colors.BROWN_0)
-all_walls.add(wall)
-all_sprites.add(wall)
 
-wall = Wall(790, 10, 10, 590, colors.BROWN_0)
-all_walls.add(wall)
-all_sprites.add(wall)
 
-wall = Wall(10, 590, 790, 10, colors.BROWN_0)
-all_walls.add(wall)
-all_sprites.add(wall)
+
 clock = pg.time.Clock()
 done = False
 
@@ -139,6 +240,7 @@ while not done:
 
     all_walls.update()
     all_backgrounds.update()
+    all_actors.update()
     screen.fill(colors.BLACK)
     all_backgrounds.draw(screen)
     all_walls.draw(screen)
