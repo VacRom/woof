@@ -8,8 +8,8 @@ class Actor(pg.sprite.Sprite):
         self.image = pg.Surface([25, 25])
         self.image.fill(colors.RED)
         self.rect = self.image.get_rect()
-        self.rect.x = 400-13
-        self.rect.y = 300-13
+        self.rect.x = center_x-player_center
+        self.rect.y = center_y-player_center
         self.walls = None
 
     def update(self):
@@ -63,6 +63,9 @@ class Background(pg.sprite.Sprite):
 
 class Build():
     def mkRoom(x, y, t, w, h, wallColor, floorColor, version):
+        x += -offset_x
+        y += -offset_y
+
         if version is 'box':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
@@ -73,6 +76,34 @@ class Build():
             all_walls.add(wallLeft)
             all_walls.add(wallRight)
             all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
+        if version is 'background':
+            floor = Background(x, y, w, h, floorColor)
+            all_backgrounds.add(floor)
+
+        if version is 'wall_1':
+            wallTop = Wall(x, y, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallTop)
+            all_backgrounds.add(floor)
+
+        if version is 'wall_2':
+            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallRight)
+            all_backgrounds.add(floor)
+
+        if version is 'wall_3':
+            wallBottom = Wall(x, y+h-t, w, t, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallBottom)
+            all_backgrounds.add(floor)
+
+        if version is 'wall_4':
+            wallLeft = Wall(x, y, t, h, wallColor)
+            floor = Background(x, y, w, h, floorColor)
+            all_walls.add(wallLeft)
             all_backgrounds.add(floor)
 
         if version is 'hall_1':
@@ -93,10 +124,10 @@ class Build():
 
         if version is 'corner_1':
             wallTop = Wall(x, y, w, t, wallColor)
-            wallRight = Wall(x+w-t, y, t, h, wallColor)
+            wallLeft = Wall(x, y, t, h, wallColor)
             floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
-            all_walls.add(wallRight)
+            all_walls.add(wallLeft)
             all_backgrounds.add(floor)
 
         if version is 'corner_2':
@@ -170,34 +201,27 @@ all_backgrounds = pg.sprite.Group()
 all_actors = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
 
-player = Actor(400-12, 300-12)
-all_actors.add(player)
-
 t = 0
-screen_x = 800
-screen_y = 600
+screen_x = 1280
+screen_y = 720
+center_x = int(screen_x/2)
+center_y = int(screen_y/2)
+player_size = 25
+player_center = int(player_size/2)
+player = Actor(center_x-player_center, center_y-player_center)
+all_actors.add(player)
+initial_x = 300
+initial_y = 0
+offset_x = initial_x-center_x
+offset_y = initial_y-center_y
 dx = 0
 dy = 0
 hitWall = False
 hitPosWall = ''
-screen = pg.display.set_mode([screen_x, screen_y])
+screen = pg.display.set_mode([screen_x, screen_y], pg.FULLSCREEN)
 pg.display.set_caption('Project')
 
-Build.mkRoom(0, 0, 10, 100, 100, colors.RED_1, colors.BLUE, 'box')
-Build.mkRoom(0, 200, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'hall_1')
-Build.mkRoom(200, 200, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'hall_2')
-Build.mkRoom(0, 400, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'corner_1')
-Build.mkRoom(200, 400, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'corner_2')
-Build.mkRoom(400, 400, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'corner_3')
-Build.mkRoom(600, 400, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'corner_4')
-Build.mkRoom(0, 600, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'end_1')
-Build.mkRoom(200, 600, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'end_2')
-Build.mkRoom(400, 600, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'end_3')
-Build.mkRoom(600, 600, 10, 100, 100, colors.BROWN_0, colors.BROWN, 'end_4')
-
-
-
-
+Build.mkRoom(-50, -50, 10, 100, 100, colors.BROWN, colors.BLACK, 'box')
 
 clock = pg.time.Clock()
 done = False
