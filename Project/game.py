@@ -66,6 +66,10 @@ class Build():
         x += -offset_x
         y += -offset_y
 
+        if version is 'wall':
+            wall = Wall(x, y, t, w, h, wallColor)
+            all_walls.add(wall)
+
         if version is 'box':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
@@ -210,23 +214,46 @@ player_size = 25
 player_center = int(player_size/2)
 player = Actor(center_x-player_center, center_y-player_center)
 all_actors.add(player)
-initial_x = 300
-initial_y = 0
+initial_x = 80
+initial_y = 30
 offset_x = initial_x-center_x
 offset_y = initial_y-center_y
 dx = 0
 dy = 0
 hitWall = False
 hitPosWall = ''
-screen = pg.display.set_mode([screen_x, screen_y], pg.FULLSCREEN)
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME)
 pg.display.set_caption('Project')
 
-Build.mkRoom(-50, -50, 10, 100, 100, colors.BROWN, colors.BLACK, 'box')
+'Starting office'
+Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'end_3')
+Build.mkRoom(0, 145, 15, 60, 15, colors.BROWN_0, colors.BLUE, 'box')
+Build.mkRoom(100, 145, 15, 60, 15, colors.BROWN_0, colors.BLUE, 'box')
+
+'Closed offices'
+Build.mkRoom(200, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+Build.mkRoom(400, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+Build.mkRoom(600, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+Build.mkRoom(-210, 105, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+Build.mkRoom(0, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+Build.mkRoom(200, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+Build.mkRoom(400, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+Build.mkRoom(600, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+
+
+'Hallway'
+Build.mkRoom(100, 145, 15, 800, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
+Build.mkRoom(-50, 145, 15, 115, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
+Build.mkRoom(0, 145, 15, 160, 80, colors.BROWN_0, colors.BROWN, 'wall_3')
+
 
 clock = pg.time.Clock()
 done = False
 
 while not done:
+
+    if pg.key.get_pressed()[pg.K_ESCAPE] is 1:
+        done = True
 
     for event in pg.event.get():
         if event.type == pg.QUIT:
