@@ -254,7 +254,7 @@ all_textBorder = pg.sprite.Group()
 all_textBox = pg.sprite.Group()
 all_text = []
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
-stage = 0
+stage = 1
 
 screen_x = 900
 screen_y = 600
@@ -284,7 +284,7 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME)
 pg.display.set_caption('Project')
 
 dx = 0
@@ -308,6 +308,8 @@ while not done:
         history[0] = True
 
         pg.event.set_allowed(None)
+        pg.mixer.music.load('track_1.mp3')
+        pg.mixer.music.play(-1, 0)
         screen.fill(colors.BLACK)
 
         all_actors.draw(screen)
@@ -345,6 +347,7 @@ while not done:
 
         all_text = []
         Text.mkText('Too many assignments.', mainFont, colors.WHITE, 18, 1)
+        Text.update()
         pg.time.delay(2500)
 
         Text.mkText('But Red does not complain, because he is safe here in this office', mainFont, colors.WHITE, 18, 2)
@@ -425,6 +428,7 @@ while not done:
         stage = 2
 
     if stage is 1 and timer1_time > 60000:
+        pg.mixer.music.fadeout(3000)
         all_text = []
         Text.mkText('And all was good.', mainFont, colors.WHITE, 18, 1)
 
@@ -438,7 +442,7 @@ while not done:
     if stage is 2 and history[2] is False:
         history[2] = True
         Text.mkText('Red did not leave his office.', mainFont, colors.WHITE, 18, 1)
-        Text.mkText('But his curiosity got the better of him.', mainFont, colors.WHITE, 18, 2)
+        Text.mkText('But this time his curiosity got the better of him.', mainFont, colors.WHITE, 18, 2)
 
     if stage is 2 and current_x > 250:
         stage = 3
