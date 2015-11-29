@@ -1,0 +1,32 @@
+Regarding the version types of Build.mkRoom():
+'wall' has one wall
+'box' has four walls
+'background' has no walls
+'wall_n' has:
+For n = 1, N wall.
+    n = 2, E wall.
+    n = 3, S wall.
+    n = 4, W wall.
+'hall_1' is a vertical hall
+'hall_2' is a horizontal hall
+'corner_n' has:
+For n = 1, NW corner.
+    n = 2, NE corner.
+    n = 3, SE corner.
+    n = 4, SW corner.
+'end_n' has:
+For n = 1, N open.
+    n = 2, E open.
+    n = 3, S open.
+    n = 4, W open.
+
+Regarding stage:
+0 = Introduction scene.
+1 = Starting in the office.
+2 = Leaving office.
+3 = Middle of hall.
+4 = End of hall.
+
+Regarding the current endstates:
+1 = Stay in the room for a long time.
+2 = Return back to the room after entering the hall.

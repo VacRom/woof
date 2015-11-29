@@ -254,7 +254,7 @@ all_textBorder = pg.sprite.Group()
 all_textBox = pg.sprite.Group()
 all_text = []
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
-stage = 1
+stage = 0
 
 screen_x = 900
 screen_y = 600
