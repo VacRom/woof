@@ -254,7 +254,7 @@ all_textBorder = pg.sprite.Group()
 all_textBox = pg.sprite.Group()
 all_text = []
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
-stage = 0
+stage = 1
 
 screen_x = 900
 screen_y = 600
@@ -464,6 +464,13 @@ while not done:
         stage = 1
         timer1_time = 60000
 
+    if stage is 4 and current_x > 500:
+        dx = +300
+        all_walls.update()
+        all_backgrounds.update()
+        all_actors.update()
+        stage = 5
+
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
             dx = 0
@@ -510,5 +517,6 @@ while not done:
     pg.display.flip()
     timer1.tick(60)
     clock.tick(60)
+    print(current_x,current_y)
 
 pg.quit()
