@@ -109,8 +109,8 @@ class Background(pg.sprite.Sprite):
 
 class Build():
     def mkRoom(x, y, t, w, h, wallColor, floorColor, version):
-        x += -offset_x
-        y += -offset_y
+        x += -current_x+center_x
+        y += -current_y+center_y
 
         if version is 'wall':
             wall = Wall(x, y, t, w, h, wallColor)
@@ -254,12 +254,15 @@ all_textBorder = pg.sprite.Group()
 all_textBox = pg.sprite.Group()
 all_text = []
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
-stage = 1
+
+stage = 0
 
 screen_x = 900
 screen_y = 600
 initial_x = 80
 initial_y = 30
+#initial_x = 1580
+#initial_y = 180
 player_size = 25
 mainFont = pg.font.SysFont('oldstandard', 18)
 secondFont = pg.font.SysFont('ptsans', 18)
@@ -270,8 +273,6 @@ center_x = int(screen_x/2)
 center_y = int(screen_y/2)
 margins = int((screen_x-200)/2)
 player_center = int(player_size/2)
-offset_x = initial_x-center_x
-offset_y = initial_y-center_y
 current_x = initial_x
 current_y = initial_y
 
@@ -284,8 +285,9 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME)
-pg.display.set_caption('Project')
+#screen = pg.display.set_mode([screen_x, screen_y])
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 dx = 0
 dy = 0
@@ -310,6 +312,7 @@ while not done:
         pg.event.set_allowed(None)
         pg.mixer.music.load('track_1.mp3')
         pg.mixer.music.play(-1, 0)
+        pg.mixer.music.set_volume(1.0)
         screen.fill(colors.BLACK)
 
         all_actors.draw(screen)
@@ -350,7 +353,7 @@ while not done:
         Text.update()
         pg.time.delay(2500)
 
-        Text.mkText('But Red does not complain, because he is safe here in this office', mainFont, colors.WHITE, 18, 2)
+        Text.mkText('But Red does not complain, because he is happy here in this office', mainFont, colors.WHITE, 18, 2)
         Text.update()
         pg.time.delay(2500)
 
@@ -364,36 +367,26 @@ while not done:
         pg.time.delay(5000)
 
         all_text = []
-        Text.mkText('Inside his office he works all day', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('Life is simple in this room - unlike the confusing world out there', mainFont, colors.WHITE, 18, 1)
         Text.update()
         pg.time.delay(2500)
 
-        Text.mkText('and all night. But Red is happy to work in his office. And all is good.', mainFont, colors.WHITE, 18, 2)
+        Text.mkText('with all those difficult decisions that are needed to be made.', mainFont, colors.WHITE, 18, 2)
+        Text.update()
+        pg.time.delay(2500)
+
+        Text.mkText('No, Red did not bother himself with those things in life.', mainFont, colors.WHITE, 18, 3)
         Text.update()
         pg.time.delay(5000)
 
         all_text = []
-        Text.mkText('More importantly, Red does not break the rules.', mainFont, colors.WHITE, 18, 1)
-        Text.update()
-        pg.time.delay(2500)
-
-        Text.mkText('One rule here is that no one is allowed to leave their offices.', mainFont, colors.WHITE, 18, 2)
-        Text.update()
-        pg.time.delay(2500)
-
-        Text.mkText('Not that the thought ever crossed his mind. Red is good.', mainFont, colors.WHITE, 18, 3)
-        Text.update()
-        pg.time.delay(5000)
-
-        all_text = []
-        Text.mkText('Red did not leave his office.', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('And so, Red did not leave his office.', mainFont, colors.WHITE, 18, 1)
         Text.update()
         pg.time.delay(5000)
 
         pg.event.set_blocked(None)
 
         all_text = []
-        stage = 'ready'
         all_walls = pg.sprite.Group()
         all_backgrounds = pg.sprite.Group()
         stage = 1
@@ -417,9 +410,40 @@ while not done:
         Build.mkRoom(600, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
 
         'Hallway'
-        Build.mkRoom(100, 145, 15, 800, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
+        Build.mkRoom(100, 145, 15, 750, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
         Build.mkRoom(-50, 145, 15, 115, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
         Build.mkRoom(0, 145, 15, 160, 80, colors.BROWN_0, colors.BROWN, 'wall_3')
+
+        'Main Room'
+        Build.mkRoom(835, -55, 15, 900, 215, colors.BROWN_0, colors.BROWN, 'corner_1')
+        Build.mkRoom(835, 210, 15, 900, 215, colors.BROWN_0, colors.BROWN, 'corner_4')
+        Build.mkRoom(835, 150, 0, 900, 100, colors.BROWN_0, colors.BROWN, 'background')
+        Build.mkRoom(1735, -55, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
+        Build.mkRoom(1735, -55+2*96, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
+        Build.mkRoom(1735, -55+4*96, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
+
+        'Top Door'
+        Build.mkRoom(1735, -55+1*96, 15, 800, 96, colors.BROWN_0, colors.BROWN, 'hall_2')
+
+        'Bottom Door'
+        Build.mkRoom(1735, -55+3*96, 15, 800, 96, colors.BROWN_0, colors.BROWN, 'hall_2')
+
+        'Colors'
+        Build.mkRoom(1735, -55+1*96-30, 15, 96, 30, colors.RED_3, colors.RED_3, 'background')
+        Build.mkRoom(1735, -55+2*96, 15, 96, 30, colors.RED_3, colors.RED_3, 'background')
+
+        Build.mkRoom(1735, -55+3*96-30, 15, 96, 30, colors.BLUE_3, colors.BLUE_3, 'background')
+        Build.mkRoom(1735, -55+4*96, 15, 96, 30, colors.BLUE_3, colors.BLUE_3, 'background')
+
+
+        'Second Room'
+        Build.mkRoom(2535, -55, 15, 350, 400, colors.BROWN_0, colors.BROWN, 'corner_2')
+        Build.mkRoom(2535, -55, 15, 15, 96+15, colors.BROWN_0, colors.BROWN, 'box')
+        Build.mkRoom(2535, -55+96*2-15, 15, 15, 96+30, colors.BROWN_0, colors.BROWN, 'box')
+        Build.mkRoom(2535, -55+96*4-15, 15, 150, 96, colors.BROWN_0, colors.BROWN, 'corner_4')
+        Build.mkRoom(2735, -55+96*4-15, 15, 150, 96, colors.BROWN_0, colors.BROWN, 'corner_3')
+        Build.mkRoom(2635, -55+96*4-15, 0, 150, 96, colors.BROWN_0, colors.BROWN, 'background')
+        Build.mkRoom(2675, -55+96*5-15, 5, 72, 48, colors.BLUE_1, colors.BLUE_3, 'end_1')
 
         timer1_time = 0
         timer1 = pg.time.Clock()
@@ -428,7 +452,7 @@ while not done:
         stage = 2
 
     if stage is 1 and timer1_time > 60000:
-        pg.mixer.music.fadeout(3000)
+        pg.mixer.music.fadeout(2000)
         all_text = []
         Text.mkText('And all was good.', mainFont, colors.WHITE, 18, 1)
 
@@ -441,7 +465,8 @@ while not done:
 
     if stage is 2 and history[2] is False:
         history[2] = True
-        Text.mkText('Red did not leave his office.', mainFont, colors.WHITE, 18, 1)
+        pg.mixer.music.fadeout(2000)
+        Text.mkText('It was strange that Red left his office.', mainFont, colors.WHITE, 18, 1)
         Text.mkText('But this time his curiosity got the better of him.', mainFont, colors.WHITE, 18, 2)
 
     if stage is 2 and current_x > 250:
@@ -449,27 +474,128 @@ while not done:
 
     if stage is 3 and history[3] is False:
         history[3] = True
+        pg.mixer.music.load('track_2.mp3')
+        pg.mixer.music.play(-1, 0)
         all_text = []
 
-    if stage is 3 and current_x > 400:
+    if stage is 3 and current_x > 500:
         stage = 4
 
     if stage is 4 and history[4] is False:
         history[4] = True
-        Text.mkText('Red is breaking the rules.', mainFont, colors.WHITE, 18, 1)
-        Text.mkText('But for what purpose? Red was happy in his office.', mainFont, colors.WHITE, 18, 2)
-        Text.mkText('It is not too late to turn back.', mainFont, colors.WHITE, 18, 3)
+        Text.mkText('Red broke the rule! He made the decision to leave,', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('but maybe it is a better choice to turn back now.', mainFont, colors.WHITE, 18, 2)
 
-    if history[4] == True and current_x in range(0, 160) and current_y in range(0, 160):
+    if history[4] == True and current_x in range(0, 160) and current_y in range(0, 160) and stage < 9:
         stage = 1
         timer1_time = 60000
 
-    if stage is 4 and current_x > 500:
-        dx = +300
+    if stage is 4 and current_x > 1000:
+        all_text = []
+        stage = 5
+
+    if stage is 5 and current_x > 1400 and history[5] is False:
+        history[5] = True
+        Text.mkText('Upon reaching the two doors, Red made the decision to enter into', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('the blue one on the bottom.', mainFont, colors.WHITE, 18, 2)
+        stage = 6
+
+    if stage is 6 and current_x in range(1830, 1840) and current_y in range(30, 120):
+        history[6] = True
+        all_text = []
+        dx = +200
+        dy = -100
         all_walls.update()
         all_backgrounds.update()
         all_actors.update()
-        stage = 5
+        Text.mkText('Let us try that again. Red entered the BLUE door.', mainFont, colors.WHITE, 18, 1)
+        stage = 7
+
+    if stage is 7 and current_x in range(1830, 1840) and current_y in range(30, 120):
+        history[7] = True
+        all_text = []
+        dx = +200
+        dy = -100
+        all_walls.update()
+        all_backgrounds.update()
+        all_actors.update()
+        Text.mkText('Red made the decision to enter the *BLUE* door.', mainFont, colors.WHITE, 18, 1)
+        Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
+        Build.mkRoom(800, 110, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
+        Build.mkRoom(800, 110+96+15, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
+        stage = 8
+
+    if stage is 8 and current_x < 800 and history[8] is False:
+        history[8] = True
+        all_text = []
+        all_walls = pg.sprite.Group()
+        all_backgrounds = pg.sprite.Group()
+        all_sprites = pg.sprite.Group()
+
+        pg.event.set_allowed(None)
+        pg.mixer.music.stop
+        pg.mixer.music.load('track_1.mp3')
+        pg.mixer.music.play(-1, 0)
+        screen.fill(colors.BLACK)
+        current_x = 80
+        current_y = 30
+
+        all_actors.draw(screen)
+        Text.mkText('This is the story of Red.', mainFont, colors.WHITE, 18, 1)
+        Text.update()
+        pg.time.delay(2500)
+
+        Text.mkText('Red is incapable of listening to others.', mainFont, colors.WHITE, 18, 2)
+        Text.update()
+        pg.time.delay(2500)
+
+        Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
+        Text.mkText('Here he is all alone in his office.', mainFont, colors.WHITE, 18, 3)
+        all_walls.update()
+        all_backgrounds.update()
+        Text.update()
+        all_backgrounds.draw(screen)
+        all_walls.draw(screen)
+        all_actors.draw(screen)
+        pg.display.flip()
+        pg.time.delay(5000)
+
+        all_text = []
+        Text.mkText('Did you know the color red symbolizes braveness?', mainFont, colors.WHITE, 18, 1)
+        Text.update()
+        pg.time.delay(2500)
+
+        Text.mkText('And also arrogance. I thought you should know that.', mainFont, colors.WHITE, 18, 2)
+        Text.update()
+        pg.time.delay(5000)
+
+        all_text = []
+        Text.mkText('Since Red clearly knows exactly what he is doing', mainFont, colors.WHITE, 18, 1)
+        Text.update()
+        pg.time.delay(2500)
+
+        Text.mkText('and knows exactly where this story is going,', mainFont, colors.WHITE, 18, 2)
+        Text.update()
+        pg.time.delay(2500)
+
+        Text.mkText('Red did whatever he wanted.', mainFont, colors.WHITE, 18, 3)
+        Text.update()
+        pg.time.delay(5000)
+
+        pg.event.set_blocked(None)
+
+        all_text = []
+        all_walls = pg.sprite.Group()
+        all_backgrounds = pg.sprite.Group()
+        Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
+        stage = 9
+
+    if stage in range(4, 10) and current_x in range(1830, 1840) and current_y in range(150, 350):
+        all_text = []
+        stage = 10
+        Text.mkText('At the end of this hall was an elavator.', mainFont, colors.WHITE, 18, 1)
+        Build.mkRoom(1740, 245, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
+        Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
 
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
@@ -501,7 +627,8 @@ while not done:
         hitWall = False
         hitPosWall = ''
 
-    timer1_time += timer1.get_time()
+    if stage < 3:
+        timer1_time += timer1.get_time()
 
     all_walls.update()
     all_backgrounds.update()
@@ -517,6 +644,6 @@ while not done:
     pg.display.flip()
     timer1.tick(60)
     clock.tick(60)
-    print(current_x,current_y)
+    print(current_x,current_y, stage, timer1_time)
 
 pg.quit()
