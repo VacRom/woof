@@ -255,7 +255,7 @@ all_textBox = pg.sprite.Group()
 all_text = []
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-stage = 1
+stage = 0
 
 screen_x = 900
 screen_y = 600
@@ -285,8 +285,8 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-screen = pg.display.set_mode([screen_x, screen_y])
-#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+#screen = pg.display.set_mode([screen_x, screen_y])
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
 pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 dx = 0
@@ -480,7 +480,7 @@ while not done:
         pg.mixer.music.fadeout(2000)
         Text.mkText('Filled with curiosity, Red did the unimaginable:', mainFont, colors.WHITE, 18, 1)
         Text.mkText('he left the room. Red had never made decisions before', mainFont, colors.WHITE, 18, 2)
-        Text.mkText('it was a strange feeling that filled him with excitement.', mainFont, colors.WHITE, 18, 3)
+        Text.mkText('and it was a strange feeling that filled him with excitement.', mainFont, colors.WHITE, 18, 3)
 
     if stage is 2 and current_x > 250:
         stage = 3
@@ -501,7 +501,7 @@ while not done:
     if current_x in range(750, 800):
         all_text = []
 
-    if history[4] == True and current_x in range(0, 160) and current_y in range(0, 160) and stage < 9:
+    if history[4] is True and current_x in range(0, 160) and current_y in range(0, 160) and stage < 8:
         stage = 1
         timer1_time = 60000
 
@@ -526,7 +526,7 @@ while not done:
         Text.mkText('Red entered the BLUE door.', mainFont, colors.WHITE, 18, 1)
         stage = 7
 
-    if stage is 7 and current_x in range(1830, 1840) and current_y in range(30, 120):
+    if stage is 7 and current_x in range(1830, 1840) and current_y in range(30, 120) and history[7] is False:
         history[7] = True
         all_text = []
         dx = +200
@@ -587,7 +587,7 @@ while not done:
         all_text = []
         Text.mkText("This aside, clearly Red does not understand the consequences", mainFont, colors.WHITE, 18, 1)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
         Text.mkText("of not following the script. Well, how about this:", mainFont, colors.WHITE, 18, 2)
         Text.update()
@@ -597,50 +597,61 @@ while not done:
         Text.mkText('Red did whatever he wanted.', mainFont, colors.WHITE, 18, 1)
         Text.update()
         pg.time.delay(5000)
-
+        
         pg.event.set_blocked(None)
 
         all_text = []
         all_walls = pg.sprite.Group()
         all_backgrounds = pg.sprite.Group()
         Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
-        timer1_time = 0
         stage = 9
 
     if stage is 9:
+        if history[9] is False:
+            timer1 = pg.time.Clock()
+            timer1_time = 1
         history[9] = True
-        if timer1_time is 20000:
+        if timer1_time > 20000 and history[20] is False:
+            history[20] = True
             all_text = []
             Text.mkText('Marvelous, Red. This story is so much more interesting', mainFont, colors.WHITE, 18, 1)
             Text.mkText('than that one I had in mind.', mainFont, colors.WHITE, 18, 2)
-        if timer1_time is 25000:
+        if timer1_time > 25000 and history[21] is False:
+            history[21] = True
             all_text = []
-        if timer1_time is 60000:
+        if timer1_time > 60000 and history[22] is False:
+            history[22] = True
             all_text = []
             Text.mkText('Are you having fun?', mainFont, colors.WHITE, 18, 1)
-        if timer1_time is 65000:
+        if timer1_time > 65000 and history[23] is False:
+            history[23] = True
             all_text = []
-        if timer1_time is 100000:
+        if timer1_time > 100000 and history[24] is False:
+            history[24] = True
             Text.mkText('Wait here for just a little longer I have a secret to tell you.', mainFont, colors.WHITE, 18, 1)
-        if timer1_time is 110000:
+        if timer1_time > 110000 and history[25] is False:
+            history[25] = True
             all_text = []
-        if timer1_time is 300000:
+        if timer1_time > 300000 and history[26] is False:
+            history[26] = True
             Text.mkText('The secret is that you have been in here for five minutes now.', mainFont, colors.WHITE, 18, 1)
             Text.mkText("Aren't you bored? Wait just a moment, let me change the music for you.", mainFont, colors.WHITE, 18, 2)
-        if timer1_time is 302000:
+        if timer1_time > 302000 and history[27] is False:
+            history[27] = True
             pg.mixer.music.stop
             pg.mixer.music.load('track_4.mp3')
             pg.mixer.music.player(-1, 0)
-        if timer1_time is 305000:
+        if timer1_time > 305000 and history[28] is False:
+            history[28] = True
             all_text = []
-        if timer1_time is 430000:
+        if timer1_time > 430000 and history[29] is False:
             pg.mixer.music.stop
             Text.mkText("Alright, Red, let's give this another go, shall we?", mainFont, colors.WHITE, 18, 1)
             Text.mkText("I'll forget that any of this ever happened.", mainFont, colors.WHITE, 18, 2)
-        if timer1_time is 435000:
+        if timer1_time > 435000:
             stage = 11
 
-    if stage in range(4, 10) and current_x in range(1830, 1840) and current_y in range(150, 350):
+    if stage in range(4, 9) and current_x in range(1830, 1840) and current_y in range(150, 350):
         all_text = []
         stage = 10
         Text.mkText('At the end of this hall was an elavator.', mainFont, colors.WHITE, 18, 1)
@@ -657,6 +668,24 @@ while not done:
 
     if stage < 11 and current_x in range(2200, 2250) and current_y > 130:
         all_text = []
+
+    if current_x in range(2675, 2725) and current_y in range(420, 430):
+        stage = 11
+
+    if stage is 11:
+        print("cutscene")
+        all_text = []
+        all_walls = pg.sprite.Group()
+        all_backgrounds = pg.sprite.Group()
+        all_sprites = pg.sprite.Group()
+
+        pg.event.set_allowed(None)
+        pg.mixer.music.stop
+        pg.mixer.music.load('track_1.mp3')
+        pg.mixer.music.play(-1, 0)
+        screen.fill(colors.BLACK)
+        current_x = 0
+        current_y = 0
 
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
@@ -688,8 +717,7 @@ while not done:
         hitWall = False
         hitPosWall = ''
 
-    if stage < 3 or stage is 9:
-        timer1_time += timer1.get_time()
+    timer1_time += timer1.get_time()
 
     all_walls.update()
     all_backgrounds.update()
@@ -705,6 +733,6 @@ while not done:
     pg.display.flip()
     timer1.tick(60)
     clock.tick(60)
-    print(current_x,current_y, stage, timer1_time)
+    print(current_x,current_y, stage, timer1_time, history[9])
 
 pg.quit()
