@@ -255,7 +255,7 @@ all_textBox = pg.sprite.Group()
 all_text = []
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-stage = 0
+stage = 1
 
 screen_x = 900
 screen_y = 600
@@ -285,8 +285,8 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-#screen = pg.display.set_mode([screen_x, screen_y])
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+screen = pg.display.set_mode([screen_x, screen_y])
+#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
 pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 dx = 0
@@ -318,11 +318,11 @@ while not done:
         all_actors.draw(screen)
         Text.mkText('This is the story of Red.', mainFont, colors.WHITE, 18, 1)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
-        Text.mkText('Red is a simple shape, and he lives a simple life.', mainFont, colors.WHITE, 18, 2)
+        Text.mkText('Red is a simple shape, and he leads a simple life.', mainFont, colors.WHITE, 18, 2)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
         Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
         Text.mkText('Here is his office. It is his very own, and he is very glad to be in it.', mainFont, colors.WHITE, 18, 3)
@@ -336,51 +336,63 @@ while not done:
         pg.time.delay(5000)
 
         all_text = []
-        Text.mkText('Red is the ideal employee: he never misses work,', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('For an uncountable number of days, Red has sat in this office', mainFont, colors.WHITE, 18, 1)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
-        Text.mkText('he never causes trouble, and he never misses his assignments.', mainFont, colors.WHITE, 18, 2)
-        Text.update()
-        pg.time.delay(2500)
-
-        Text.mkText('He has many assignments.', mainFont, colors.WHITE, 18, 3)
+        Text.mkText('completing a number of different assignments.', mainFont, colors.WHITE, 18, 2)
         Text.update()
         pg.time.delay(5000)
 
         all_text = []
-        Text.mkText('Too many assignments.', mainFont, colors.WHITE, 18, 1)
+        Text.mkText("Today's assignment was to stare at this wall", mainFont, colors.WHITE, 18, 1)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
-        Text.mkText('But Red does not complain, because he is happy here in this office', mainFont, colors.WHITE, 18, 2)
+        Text.mkText("which he enjoyed far more than yesterday's assignment:", mainFont, colors.WHITE, 18, 2)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
-        Text.mkText('and everything he had ever wanted is in this office.', mainFont, colors.WHITE, 18, 3)
+        Text.mkText('to stare at the ceiling.', mainFont, colors.WHITE, 18, 3)
         Text.update()
         pg.time.delay(5000)
 
         all_text = []
-        Text.mkText('He is happy.', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('Although Red did not always understand why he continued with these tasks', mainFont, colors.WHITE, 18, 1)
+        Text.update()
+        pg.time.delay(2000)
+
+        Text.mkText('Red decided to not question the assignment makers.', mainFont, colors.WHITE, 18, 2)
+        Text.update()
+        pg.time.delay(2000)
+
+        Text.mkText('After all, Red has always lived his life in this way.', mainFont, colors.WHITE, 18, 3)
         Text.update()
         pg.time.delay(5000)
 
         all_text = []
         Text.mkText('Life is simple in this room - unlike the confusing world out there', mainFont, colors.WHITE, 18, 1)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
         Text.mkText('with all those difficult decisions that are needed to be made.', mainFont, colors.WHITE, 18, 2)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
         Text.mkText('No, Red did not bother himself with those things in life.', mainFont, colors.WHITE, 18, 3)
         Text.update()
         pg.time.delay(5000)
 
         all_text = []
-        Text.mkText('And so, Red did not leave his office.', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('And so, Red stared and stared and stared...', mainFont, colors.WHITE, 18, 1)
+        Text.update()
+        pg.time.delay(2000)
+
+        Text.mkText('and stared and stared...', mainFont, colors.WHITE, 18, 2)
+        Text.update()
+        pg.time.delay(2000)
+
+        Text.mkText('and most importantly, did not leave the room.', mainFont, colors.WHITE, 18, 3)
         Text.update()
         pg.time.delay(5000)
 
@@ -466,8 +478,9 @@ while not done:
     if stage is 2 and history[2] is False:
         history[2] = True
         pg.mixer.music.fadeout(2000)
-        Text.mkText('It was strange that Red left his office.', mainFont, colors.WHITE, 18, 1)
-        Text.mkText('But this time his curiosity got the better of him.', mainFont, colors.WHITE, 18, 2)
+        Text.mkText('Filled with curiosity, Red did the unimaginable:', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('he left the room. Red had never made decisions before', mainFont, colors.WHITE, 18, 2)
+        Text.mkText('it was a strange feeling that filled him with excitement.', mainFont, colors.WHITE, 18, 3)
 
     if stage is 2 and current_x > 250:
         stage = 3
@@ -483,8 +496,10 @@ while not done:
 
     if stage is 4 and history[4] is False:
         history[4] = True
-        Text.mkText('Red broke the rule! He made the decision to leave,', mainFont, colors.WHITE, 18, 1)
-        Text.mkText('but maybe it is a better choice to turn back now.', mainFont, colors.WHITE, 18, 2)
+        Text.mkText('Red continued down the hall.', mainFont, colors.WHITE, 18, 1)
+
+    if current_x in range(750, 800):
+        all_text = []
 
     if history[4] == True and current_x in range(0, 160) and current_y in range(0, 160) and stage < 9:
         stage = 1
@@ -497,7 +512,7 @@ while not done:
     if stage is 5 and current_x > 1400 and history[5] is False:
         history[5] = True
         Text.mkText('Upon reaching the two doors, Red made the decision to enter into', mainFont, colors.WHITE, 18, 1)
-        Text.mkText('the blue one on the bottom.', mainFont, colors.WHITE, 18, 2)
+        Text.mkText('the blue one.', mainFont, colors.WHITE, 18, 2)
         stage = 6
 
     if stage is 6 and current_x in range(1830, 1840) and current_y in range(30, 120):
@@ -508,7 +523,7 @@ while not done:
         all_walls.update()
         all_backgrounds.update()
         all_actors.update()
-        Text.mkText('Let us try that again. Red entered the BLUE door.', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('Red entered the BLUE door.', mainFont, colors.WHITE, 18, 1)
         stage = 7
 
     if stage is 7 and current_x in range(1830, 1840) and current_y in range(30, 120):
@@ -519,7 +534,7 @@ while not done:
         all_walls.update()
         all_backgrounds.update()
         all_actors.update()
-        Text.mkText('Red made the decision to enter the *BLUE* door.', mainFont, colors.WHITE, 18, 1)
+        Text.mkText('Red learned a valuable lesson on the inconvenience of colorblindness.', mainFont, colors.WHITE, 18, 1)
         Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
         Build.mkRoom(800, 110, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
         Build.mkRoom(800, 110+96+15, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
@@ -543,11 +558,11 @@ while not done:
         all_actors.draw(screen)
         Text.mkText('This is the story of Red.', mainFont, colors.WHITE, 18, 1)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
         Text.mkText('Red is incapable of listening to others.', mainFont, colors.WHITE, 18, 2)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
         Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
         Text.mkText('Here he is all alone in his office.', mainFont, colors.WHITE, 18, 3)
@@ -563,22 +578,23 @@ while not done:
         all_text = []
         Text.mkText('Did you know the color red symbolizes braveness?', mainFont, colors.WHITE, 18, 1)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(2000)
 
         Text.mkText('And also arrogance. I thought you should know that.', mainFont, colors.WHITE, 18, 2)
         Text.update()
         pg.time.delay(5000)
 
         all_text = []
-        Text.mkText('Since Red clearly knows exactly what he is doing', mainFont, colors.WHITE, 18, 1)
+        Text.mkText("This aside, clearly Red does not understand the consequences", mainFont, colors.WHITE, 18, 1)
         Text.update()
         pg.time.delay(2500)
 
-        Text.mkText('and knows exactly where this story is going,', mainFont, colors.WHITE, 18, 2)
+        Text.mkText("of not following the script. Well, how about this:", mainFont, colors.WHITE, 18, 2)
         Text.update()
-        pg.time.delay(2500)
+        pg.time.delay(5000)
 
-        Text.mkText('Red did whatever he wanted.', mainFont, colors.WHITE, 18, 3)
+        all_text = []
+        Text.mkText('Red did whatever he wanted.', mainFont, colors.WHITE, 18, 1)
         Text.update()
         pg.time.delay(5000)
 
@@ -588,7 +604,41 @@ while not done:
         all_walls = pg.sprite.Group()
         all_backgrounds = pg.sprite.Group()
         Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
+        timer1_time = 0
         stage = 9
+
+    if stage is 9:
+        history[9] = True
+        if timer1_time is 20000:
+            all_text = []
+            Text.mkText('Marvelous, Red. This story is so much more interesting', mainFont, colors.WHITE, 18, 1)
+            Text.mkText('than that one I had in mind.', mainFont, colors.WHITE, 18, 2)
+        if timer1_time is 25000:
+            all_text = []
+        if timer1_time is 60000:
+            all_text = []
+            Text.mkText('Are you having fun?', mainFont, colors.WHITE, 18, 1)
+        if timer1_time is 65000:
+            all_text = []
+        if timer1_time is 100000:
+            Text.mkText('Wait here for just a little longer I have a secret to tell you.', mainFont, colors.WHITE, 18, 1)
+        if timer1_time is 110000:
+            all_text = []
+        if timer1_time is 300000:
+            Text.mkText('The secret is that you have been in here for five minutes now.', mainFont, colors.WHITE, 18, 1)
+            Text.mkText("Aren't you bored? Wait just a moment, let me change the music for you.", mainFont, colors.WHITE, 18, 2)
+        if timer1_time is 302000:
+            pg.mixer.music.stop
+            pg.mixer.music.load('track_4.mp3')
+            pg.mixer.music.player(-1, 0)
+        if timer1_time is 305000:
+            all_text = []
+        if timer1_time is 430000:
+            pg.mixer.music.stop
+            Text.mkText("Alright, Red, let's give this another go, shall we?", mainFont, colors.WHITE, 18, 1)
+            Text.mkText("I'll forget that any of this ever happened.", mainFont, colors.WHITE, 18, 2)
+        if timer1_time is 435000:
+            stage = 11
 
     if stage in range(4, 10) and current_x in range(1830, 1840) and current_y in range(150, 350):
         all_text = []
@@ -596,6 +646,17 @@ while not done:
         Text.mkText('At the end of this hall was an elavator.', mainFont, colors.WHITE, 18, 1)
         Build.mkRoom(1740, 245, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
         Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
+
+    if stage is 10 and current_x in range(1900, 2000) and current_y in range(60, 120):
+        history[10] = True
+        all_text = []
+        Text.mkText('That was really pointless, Red.', mainFont, colors.WHITE, 18, 1)
+
+    if stage is 10 and current_x in range(2400, 2500) and current_y in range(60, 120):
+        all_text = []
+
+    if stage < 11 and current_x in range(2200, 2250) and current_y > 130:
+        all_text = []
 
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
@@ -627,7 +688,7 @@ while not done:
         hitWall = False
         hitPosWall = ''
 
-    if stage < 3:
+    if stage < 3 or stage is 9:
         timer1_time += timer1.get_time()
 
     all_walls.update()
