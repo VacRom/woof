@@ -57,9 +57,9 @@ class Text():
         # textType 0 is freeze the screen then wait 2s, 1 is freeze
         # then wait 5s, and 2 is display without freeze.
         if textType is 0:
-            pg.time.delay(2000)
+            pg.time.delay(2500)
         elif textType is 1:
-            pg.time.delay(5000)
+            pg.time.delay(4500)
             all_text = []
         elif textType is 2:
             pass
