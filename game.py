@@ -36,11 +36,11 @@ class TextBox(pg.sprite.Sprite):
 class TextBorder(pg.sprite.Sprite):
     def __init__(self, color):
         super().__init__()
-        self.image = pg.Surface([2*margins+10, 75+10])
+        self.image = pg.Surface([2*margins+10, 85])
         self.image.fill(color)
         self.rect = self.image.get_rect()
         self.rect.x = center_x-margins-5
-        self.rect.y = screen_y-150-5
+        self.rect.y = screen_y-155
         self.wall = None
 
     def update(self):
@@ -286,7 +286,7 @@ all_text = []
 
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-stage = 0
+stage = 11
 
 screen_x = 900
 screen_y = 600
@@ -344,9 +344,7 @@ while not done:
 
         pg.event.set_allowed(None)
         World.music('track_1.mp3')
-
-        screen.fill(colors.BLACK)
-        all_actors.draw(screen)
+        World.update()
 
         Text.mkText('This is the story of Red.', mainFont, colors.WHITE, 18, 1, 0)
         Text.mkText('Red is a simple shape, and he leads a simple life.', mainFont, colors.WHITE, 18, 2, 0)
@@ -424,7 +422,6 @@ while not done:
 
         Build.mkRoom(1735, -55+3*96-30, 15, 96, 30, colors.BLUE_3, colors.BLUE_3, 'background')
         Build.mkRoom(1735, -55+4*96, 15, 96, 30, colors.BLUE_3, colors.BLUE_3, 'background')
-
 
         'Second Room'
         Build.mkRoom(2535, -55, 15, 350, 400, colors.BROWN_0, colors.BROWN, 'corner_2')
@@ -619,19 +616,60 @@ while not done:
 
     if stage is 11 and history[11] is False:
         history[11] = True
+        timer1 = pg.time.Clock()
+        timer1_time = 0
         all_text = []
         all_walls = pg.sprite.Group()
         all_backgrounds = pg.sprite.Group()
         all_sprites = pg.sprite.Group()
-
-        pg.event.set_allowed(None)
-        World.music('track_5.mp3')
         screen.fill(colors.BLACK)
+        World.music('track_5.mp3')
         current_x = 0
         current_y = 0
-        pg. event.set_blocked(None)
+        World.update()
+        pg.event.set_allowed(None)
+
+        Text.mkText('Red stepped into the elavator, and the doors shut behind him.', mainFont, colors.WHITE, 18, 1, 0)
+        Text.mkText('Strangely, the machine had no buttons. Instead, it began to move on its own,', mainFont, colors.WHITE, 18, 2, 0)
+        Text.mkText('almost as if the destination were already decided for him.', mainFont, colors.WHITE, 18, 3, 1)
+
+        Text.mkText('Red was tired from deciding on which door to take.', mainFont, colors.WHITE, 18, 1, 0)
+        Text.mkText("At the very least, in here Red did not have to make a choice", mainFont, colors.WHITE, 18, 2, 0)
+        Text.mkText('and a part of him wished that the doors would never open', mainFont, colors.WHITE, 18, 3, 1)
+
+        Text.mkText('But Red knew that eventually they would.', mainFont, colors.WHITE, 18, 1, 0)
+        Text.mkText('After all, what purpose would an elevator serve if', mainFont, colors.WHITE, 18, 2, 0)
+        Text.mkText('it did not do as it was ordered?', mainFont, colors.WHITE, 18, 3, 1)
+
+        Text.mkText('The doors opened.', mainFont, colors.WHITE, 18, 1, 1)
+
+        'First Hall'
+        Build.mkRoom(-36, -24, 5, 72, 48, colors.BLUE_1, colors.BLUE_3, 'end_1')
+        Build.mkRoom(-55, -348, 15, 112, 324, colors.BROWN_0, colors.RED_3, 'hall_1')
+        Build.mkRoom(-40, -39, 15, 15, 15, colors.BROWN_0, colors.RED_3, 'box')
+        Build.mkRoom(27, -39, 15, 15, 15, colors.BROWN_0, colors.RED_3, 'box')
+        Build.mkRoom(-55-15, -460, 15, 112, 112, colors.BROWN_0, colors.RED_3, 'background')
+
+        'North Hall'
+        Build.mkRoom(-55, -760, 15, 112, 300, colors.BROWN_0, colors.RED_3, 'hall_1')
+
+        'Office'
+        Build.mkRoom(-55-112, -760-336, 15, 336, 336, colors.BROWN_0, colors.RED_3, 'hall_1')
+        Build.mkRoom(-55-112, -760-336, 15, 112, 336, colors.BROWN_0, colors.RED_3, 'wall_3')
+
+
+        'West Hall'
+        Build.mkRoom(-55-300, -348-112, 15, 300+15, 112, colors.BROWN_0, colors.RED_3, 'hall_2')
+
+        'East Hall'
+        Build.mkRoom(-55+112-15, -348-112, 15, 1000, 112, colors.BROWN_0, colors.RED_3, 'hall_2')
+        if history[8] is False:
+            Build.mkRoom(-55, -348-112, 15, 116, 112, colors.BROWN_0, colors.RED_3, 'wall_2')
+
+        pg.event.set_blocked(None)
 
 # History8 is the long one.
+# People are not machines. Free will.
 
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
