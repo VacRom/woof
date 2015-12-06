@@ -316,7 +316,6 @@ player_size = 25
 mainFont = pg.font.SysFont('oldstandard', 18)
 secondFont = pg.font.SysFont('ptsans', 18)
 thirdFont = pg.font.SysFont('raleway', 18)
-textBoxState = False
 
 center_x = int(screen_x/2)
 center_y = int(screen_y/2)
