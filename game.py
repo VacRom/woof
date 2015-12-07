@@ -11,6 +11,7 @@ import pygame as pg
 import colors
 
 
+# Actor represents all the players that are in the game.
 class Actor(pg.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
@@ -28,6 +29,10 @@ class Actor(pg.sprite.Sprite):
         current_y += -dy
 
 
+# The following three classes are utilized to make text in the
+# game. The TextBox and TextBorder classes make the box in which the
+# text is to be written. Text border takes in a color and makes a text
+# box of that color.
 class TextBox(pg.sprite.Sprite):
     def __init__(self, color):
         super().__init__()
@@ -42,6 +47,8 @@ class TextBox(pg.sprite.Sprite):
         pass
 
 
+# Text border takes in a color and makes a border for the text box of
+# that color.
 class TextBorder(pg.sprite.Sprite):
     def __init__(self, color):
         super().__init__()
@@ -56,6 +63,10 @@ class TextBorder(pg.sprite.Sprite):
         pass
 
 
+# The Text class generates the text. mkText takes in a text (string),
+# font type (look at the list of fonts in the Notes folder), a font
+# color (in form of a tuple), a font size (integer), a row (each
+# increasing row 'indents' the text, and a text type.)
 class Text():
     def mkText(text, font, color, size, row, textType):
         global all_text
@@ -72,14 +83,19 @@ class Text():
             text = [font.render(text, 1, color), center_x-margins+80, center_y-80+row+3]
             all_caption.append(text)
         Text.update()
-        # textType 0 is freeze the screen then wait 2s, 1 is freeze
-        # then wait 5s, and 2 is display without freeze.
+        # textType 0 is used for cutscenes and freezes the screen for
+        # 2s. texType 1 is similar except that it freezes the screen
+        # for 5s then erases the text in preparation for the next page
+        # of text.
         if textType is 0:
             pg.time.delay(2500)
         elif textType is 1:
             pg.time.delay(4500)
             all_text = []
 
+    # This update function ensures that text is only displayed when
+    # the number of text to be displayed is not zero. Furthermore, the
+    # text box automatically pops up if this condition is met.
     def update():
         if len(all_text) != 0:
             all_textBorder.draw(screen)
@@ -92,6 +108,7 @@ class Text():
             pg.display.flip()
 
 
+# A wall is a sprite that Actors cannot pass through.
 class Wall(pg.sprite.Sprite):
     def __init__(self, x, y, width, height, color):
         super().__init__()
@@ -101,6 +118,8 @@ class Wall(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+    # This update function checks for collisions and furthermore
+    # indicates which side of the actor the wall has hit.
     def update(self):
         global hitWall
         global hitPosWall
@@ -123,6 +142,7 @@ class Wall(pg.sprite.Sprite):
             hitPosWall = ''
 
 
+# A Background is a sprite that Actors can pass through.
 class Background(pg.sprite.Sprite):
     def __init__(self, x, y, width, height, color):
         super().__init__()
@@ -137,6 +157,11 @@ class Background(pg.sprite.Sprite):
         self.rect.y += dy
 
 
+# This Build class makes a number of rooms, given their (x,y)
+# coordinate and their width and height. Wall thickness and colors of
+# the backgrounds and walls can also be generated. Version tells the
+# program exactly what type of room (closed, 3 walls, etc.) to
+# make. Check the notes folder for what all version types mean.
 class Build():
     def mkRoom(x, y, t, w, h, wallColor, floorColor, version):
         x += -current_x+center_x
@@ -146,7 +171,7 @@ class Build():
             wall = Wall(x, y, t, w, h, wallColor)
             all_walls.add(wall)
 
-        if version is 'box':
+        elif version is 'box':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
@@ -158,35 +183,35 @@ class Build():
             all_walls.add(wallBottom)
             all_backgrounds.add(floor)
 
-        if version is 'background':
+        elif version is 'background':
             floor = Background(x, y, w, h, floorColor)
             all_backgrounds.add(floor)
 
-        if version is 'wall_1':
+        elif version is 'wall_1':
             wallTop = Wall(x, y, w, t, wallColor)
             floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
             all_backgrounds.add(floor)
 
-        if version is 'wall_2':
+        elif version is 'wall_2':
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallRight)
             all_backgrounds.add(floor)
 
-        if version is 'wall_3':
+        elif version is 'wall_3':
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
             floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallBottom)
             all_backgrounds.add(floor)
 
-        if version is 'wall_4':
+        elif version is 'wall_4':
             wallLeft = Wall(x, y, t, h, wallColor)
             floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallLeft)
             all_backgrounds.add(floor)
 
-        if version is 'hall_1':
+        elif version is 'hall_1':
             wallLeft = Wall(x, y, t, h, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             floor = Background(x, y, w, h, floorColor)
@@ -194,7 +219,7 @@ class Build():
             all_walls.add(wallRight)
             all_backgrounds.add(floor)
 
-        if version is 'hall_2':
+        elif version is 'hall_2':
             wallTop = Wall(x, y, w, t, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
             floor = Background(x, y, w, h, floorColor)
@@ -202,7 +227,7 @@ class Build():
             all_walls.add(wallBottom)
             all_backgrounds.add(floor)
 
-        if version is 'corner_1':
+        elif version is 'corner_1':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
             floor = Background(x, y, w, h, floorColor)
@@ -210,7 +235,7 @@ class Build():
             all_walls.add(wallLeft)
             all_backgrounds.add(floor)
 
-        if version is 'corner_2':
+        elif version is 'corner_2':
             wallTop = Wall(x, y, w, t, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             floor = Background(x, y, w, h, floorColor)
@@ -218,7 +243,7 @@ class Build():
             all_walls.add(wallRight)
             all_backgrounds.add(floor)
 
-        if version is 'corner_3':
+        elif version is 'corner_3':
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
             floor = Background(x, y, w, h, floorColor)
@@ -234,7 +259,7 @@ class Build():
             all_walls.add(wallBottom)
             all_backgrounds.add(floor)
 
-        if version is 'end_1':
+        elif version is 'end_1':
             wallLeft = Wall(x, y, t, h, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
@@ -244,7 +269,7 @@ class Build():
             all_walls.add(wallBottom)
             all_backgrounds.add(floor)
 
-        if version is 'end_2':
+        elif version is 'end_2':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
@@ -254,7 +279,7 @@ class Build():
             all_walls.add(wallBottom)
             all_backgrounds.add(floor)
 
-        if version is 'end_3':
+        elif version is 'end_3':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
@@ -264,7 +289,7 @@ class Build():
             all_walls.add(wallRight)
             all_backgrounds.add(floor)
 
-        if version is 'end_4':
+        elif version is 'end_4':
             wallTop = Wall(x, y, w, t, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
@@ -275,6 +300,8 @@ class Build():
             all_backgrounds.add(floor)
 
 
+# The World class updates the global state of the game. This includes
+# drawing the world as well as managing the music.
 class World():
     def update():
         all_walls.update()
@@ -931,6 +958,7 @@ while not done:
 
         done = True
 
+    # Here are the list of captions in the game.
     if pg.key.get_pressed()[pg.K_SPACE] is 1:
         if current_x in range(25, 136) and current_y in range(25, 136) and stage < 11:
             Text.mkText("Red knew that he shouldn't leave this room. And so, he didn't.", mainFont, colors.BLUE_3, 4, 1, 3)
@@ -961,6 +989,8 @@ while not done:
     if pg.key.get_pressed()[pg.K_SPACE] is 0:
         all_caption = []
 
+    # This determines the player motion by scrolling all nonActors on
+    # the screen in the opposite direction.
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
             dx = 0
