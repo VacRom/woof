@@ -59,9 +59,18 @@ class TextBorder(pg.sprite.Sprite):
 class Text():
     def mkText(text, font, color, size, row, textType):
         global all_text
+        global all_caption
         row = row*22
-        text = [font.render(text, 1, color), center_x-margins+3, screen_y-170+row+3]
-        all_text.append(text)
+        if textType < 3:
+            text = [font.render(text, 1, color), center_x-margins+3, screen_y-170+row+3]
+            all_text.append(text)
+        elif textType is 3:
+            all_caption = []
+            text = [font.render(text, 1, color), center_x-margins+80, center_y-80+row+3]
+            all_caption.append(text)
+        else:
+            text = [font.render(text, 1, color), center_x-margins+80, center_y-80+row+3]
+            all_caption.append(text)
         Text.update()
         # textType 0 is freeze the screen then wait 2s, 1 is freeze
         # then wait 5s, and 2 is display without freeze.
@@ -70,8 +79,6 @@ class Text():
         elif textType is 1:
             pg.time.delay(4500)
             all_text = []
-        elif textType is 2:
-            pass
 
     def update():
         if len(all_text) != 0:
@@ -79,6 +86,9 @@ class Text():
             all_textBox.draw(screen)
             for n in range(len(all_text)):
                 screen.blit(all_text[n][0], (all_text[n][1], all_text[n][2]))
+        if len(all_caption) != 0:
+            for n in range(len(all_caption)):
+                screen.blit(all_caption[n][0], (all_caption[n][1], all_caption[n][2]))
             pg.display.flip()
 
 
@@ -303,10 +313,11 @@ all_sprites = pg.sprite.Group()
 all_textBorder = pg.sprite.Group()
 all_textBox = pg.sprite.Group()
 all_text = []
+all_caption = []
 
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-stage = 0
+stage = 1
 
 screen_x = 900
 screen_y = 600
@@ -337,7 +348,8 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
+#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
 pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 clock = pg.time.Clock()
@@ -918,6 +930,36 @@ while not done:
         Text.mkText("And all was good.", mainFont, colors.RED_1, 18, 1, 1)
 
         done = True
+
+    if pg.key.get_pressed()[pg.K_SPACE] is 1:
+        if current_x in range(25, 136) and current_y in range(25, 136) and stage < 11:
+            Text.mkText("Red knew that he shouldn't leave this room. And so, he didn't.", mainFont, colors.BLUE_3, 4, 1, 3)
+        elif current_x in range(-41, -35) and current_y in range(169, 199) and stage < 11:
+            Text.mkText("Room 855: Lunch Room.", mainFont, colors.BLUE_3, 4, 1, 3)
+            Text.mkText("Today's lunch menu: Turkey surprise!", mainFont, colors.BLUE_3, 4, 2, 4)
+            Text.mkText("The surprise is that there is no turkey.", mainFont, colors.BLUE_3, 4, 3, 4)
+        elif current_x in range(77, 83) and current_y in range(193, 199) and stage < 11:
+            Text.mkText("Room 856: Button Presser.", mainFont, colors.BLUE_3, 4, 3, 3)
+        elif current_x in range(277, 283) and current_y in range(193, 199) and stage < 11:
+            Text.mkText("Room 857: Pencil Sharpener-er.", mainFont, colors.BLUE_3, 4, 3, 3)
+        elif current_x in range(477, 483) and current_y in range(193, 199) and stage < 11:
+            Text.mkText("Room 858: Lever puller.", mainFont, colors.BLUE_3, 4, 3, 3)
+        elif current_x in range(677, 683) and current_y in range(193, 199) and stage < 11:
+            Text.mkText("Room 859: Lever pusher.", mainFont, colors.BLUE_3, 4, 3, 3)
+        elif current_x in range(77, 83) and current_y in range(169, 173) and stage < 11:
+            Text.mkText("Room 854: Starer.", mainFont, colors.BLUE_3, 4, 3, 3)
+        elif current_x in range(277, 283) and current_y in range(169, 173) and stage < 11:
+            Text.mkText("Room 853: vacant.", mainFont, colors.BLUE_3, 4, 3, 3)
+        elif current_x in range(477, 483) and current_y in range(169, 173) and stage < 11:
+            Text.mkText("Room 852: vacant.", mainFont, colors.BLUE_3, 4, 3, 3)
+        elif current_x in range(677, 683) and current_y in range(169, 173) and stage < 11:
+            Text.mkText("Room 851: Safety inspector.", mainFont, colors.BLUE_3, 4, 3, 3)
+
+        else:
+            all_caption = []
+
+    if pg.key.get_pressed()[pg.K_SPACE] is 0:
+        all_caption = []
 
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
