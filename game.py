@@ -105,7 +105,7 @@ class Text():
         if len(all_caption) != 0:
             for n in range(len(all_caption)):
                 screen.blit(all_caption[n][0], (all_caption[n][1], all_caption[n][2]))
-            pg.display.flip()
+        pg.display.flip()
 
 
 # A wall is a sprite that Actors cannot pass through.
@@ -344,7 +344,7 @@ all_caption = []
 
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-stage = 1
+stage = 0
 
 screen_x = 900
 screen_y = 600
