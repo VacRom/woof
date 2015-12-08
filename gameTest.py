@@ -331,6 +331,7 @@ dx = 0
 dy = 0
 hitWall = False
 hitPosWall = ''
+playCutscene = False
 
 player = Actor(center_x-player_center, center_y-player_center)
 all_actors.add(player)
@@ -341,8 +342,8 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
+#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
 pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 clock = pg.time.Clock()
@@ -489,8 +490,13 @@ while not done:
                 musicOn = 0
                 pg.mixer.music.fadeout(10)
 
-    if stage is 3:
-        if history[3] is False:
+    if stage is 4:
+        if history[4] is False:
+            all_walls = pg.sprite.Group()
+            all_backgrounds = pg.sprite.Group()
+            all_sprites = pg.sprite.Group()
+            World.update()
+
             pg.event.set_allowed(None)
 
             Text.mkText('This is an example of a cutscene.', mainFont, colors.WHITE, 18, 1, 0)
@@ -508,17 +514,18 @@ while not done:
 
             Text.mkText('Or any of these rooms.', mainFont, colors.WHITE, 18, 1, 1)
 
-            Text.mkText('You can move as soon as the cutscene is over', mainFont, colors.WHITE, 18, 1, 0)
-            Text.mkText('Press 5 to continue.', mainFont, colors.WHITE, 18, 2, 1)
+            Text.mkText('This is the end of the tutorial!', mainFont, colors.WHITE, 18, 1, 1)
             pg.event.set_blocked(None)
 
-            history[3] = True
-            all_text = []
-            # Due to a bug, the map gets erased upon completing this
-            # specific cutscene.
+            done = True
 
-    if stage is 4 and history[4] is False:
+    if playCutscene is True and history[4] is False:
+        playCutscene = False
         history[4] = True
+        stage = 4
+
+    if stage is 3 and history[3] is False:
+        history[3] = True
         current_x = 80
         current_y = 30
         'Starting office'
@@ -541,11 +548,11 @@ while not done:
 
         Text.mkText("This final tutorial is on captions. Captions are text that pop up", mainFont, colors.WHITE, 4, 1, 2)
         Text.mkText("when you press the interact (SPACE) button in certain rooms.", mainFont, colors.WHITE, 4, 2, 2)
-        Text.mkText("This is the end of the mini-tutorial. Press ESC to exit.", mainFont, colors.RED, 4, 3, 2)
+        Text.mkText("Press 5 to continue.", mainFont, colors.WHITE, 4, 3, 2)
 
     # Captions
     if pg.key.get_pressed()[pg.K_SPACE] is 1:
-        if stage is 4:
+        if stage is 3:
             if current_x in range(25, 136) and current_y in range(25, 136) and stage < 11:
                 Text.mkText("This is an example of a caption.", mainFont, colors.BLUE_3, 4, 1, 3)
             elif current_x in range(-41, -35) and current_y in range(169, 199) and stage < 11:
@@ -606,7 +613,7 @@ while not done:
         all_sprites = pg.sprite.Group()
 
     if event.type is pg.KEYDOWN and event.key is pg.K_4:
-        history[stage] = True
+        history[stage] = False
         stage = 3
         current_x = 80
         current_y = 30
@@ -626,6 +633,7 @@ while not done:
         all_walls = pg.sprite.Group()
         all_backgrounds = pg.sprite.Group()
         all_sprites = pg.sprite.Group()
+        playCutscene = True
 
     if stage not in range(0, len(history)):
         stage = 0
