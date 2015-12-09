@@ -503,7 +503,7 @@ while not done:
             Text.mkText('And all was good.', mainFont, colors.WHITE, 18, 1, 1)
             done = True
 
-    if stage is 2:
+    elif stage is 2:
         if history[2] is False:
             history[2] = True
             Text.mkText('Filled with curiosity, Red did the unimaginable:', mainFont, colors.WHITE, 18, 1, 2)
@@ -513,7 +513,7 @@ while not done:
         if current_x > 250:
             stage = 3
 
-    if stage is 3:
+    elif stage is 3:
         if history[3] is False:
             history[3] = True
             World.music('track_2.mp3')
@@ -522,7 +522,7 @@ while not done:
         if current_x > 500:
             stage = 4
 
-    if stage is 4:
+    elif stage is 4:
         if history[4] is False:
             history[4] = True
             Text.mkText('Red found it odd that the others rooms around him were locked.', mainFont, colors.WHITE, 18, 1, 2)
@@ -532,19 +532,14 @@ while not done:
             all_text = []
             stage = 5
 
-    if stage < 8:
-        if history[4] is True and current_x in range(0, 160) and current_y in range(0, 160):
-            stage = 1
-            timer1_time = 60000
-
-    if stage is 5:
+    elif stage is 5:
         if current_x > 1400 and history[5] is False:
             history[5] = True
             Text.mkText('Upon reaching the two doors, Red made the decision to enter into', mainFont, colors.WHITE, 18, 1, 2)
             Text.mkText('the blue door.', mainFont, colors.WHITE, 18, 2, 2)
             stage = 6
 
-    if stage is 6:
+    elif stage is 6:
         if current_x in range(1830, 1840) and current_y in range(30, 120):
             history[6] = True
             all_text = []
@@ -554,7 +549,7 @@ while not done:
             Text.mkText('Red entered into the blue door.', mainFont, colors.WHITE, 18, 1, 2)
             stage = 7
 
-    if stage is 7:
+    elif stage is 7:
         if current_x in range(1830, 1840) and current_y in range(30, 120) and history[7] is False:
             history[7] = True
             all_text = []
@@ -570,7 +565,7 @@ while not done:
             Build.mkRoom(800, 110+96+15, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
             stage = 8
 
-    if stage is 8:
+    elif stage is 8:
         if current_x < 800 and history[8] is False:
             history[8] = True
 
@@ -659,16 +654,7 @@ while not done:
         if timer1_time > 315000:
             stage = 11
 
-    if stage in range(4, 9):
-        if current_x in range(1830, 1840) and current_y in range(150, 350):
-            all_text = []
-            stage = 10
-            Text.mkText('At the end of this hall was an elavator which would take him to the above floor.', mainFont, colors.WHITE, 18, 1, 2)
-            Text.mkText('Maybe there he would find an answer on what to do next.', mainFont, colors.WHITE, 18, 2, 2)
-            Build.mkRoom(1740, 245, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
-            Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
-
-    if stage is 10:
+    elif stage is 10:
         if current_x in range(1900, 2000) and current_y in range(60, 120) and history[10] is False:
             history[10] = True
             all_text = []
@@ -678,14 +664,7 @@ while not done:
         if current_x in range(2400, 2500) and current_y in range(60, 120):
             all_text = []
 
-    if stage < 11:
-        if current_x in range(2200, 2250) and current_y > 130:
-            all_text = []
-
-        if current_x in range(2675, 2725) and current_y in range(420, 430):
-            stage = 11
-
-    if stage is 11:
+    elif stage is 11:
         if history[11] is False:
             history[11] = True
             timer1 = pg.time.Clock()
@@ -786,14 +765,14 @@ while not done:
 
             stage = 12
 
-    if stage is 12:
+    elif stage is 12:
         if current_y < -300 and history[13] is False:
             history[13] = True
             Text.mkText('Red continued directly down the hall towards his boss room.', mainFont, colors.WHITE, 18, 1, 2)
             Text.mkText("He'd finally discover exactly what he needs to do.", mainFont, colors.WHITE, 18, 2, 2)
             stage = 13
 
-    if stage is 13:
+    elif stage is 13:
         if current_y < -530:
             Build.mkRoom(-55, -460-6, 15, 112, 112, colors.BROWN_0, colors.RED_3, 'wall_1')
             all_text = []
@@ -875,11 +854,11 @@ while not done:
             pg.mixer.music.fadeout(1)
             stage = 16
 
-    if stage is 14:
+    elif stage is 14:
         if current_y < -770:
             stage = 15
 
-    if stage is 15:
+    elif stage is 15:
         all_text = []
         all_walls = pg.sprite.Group()
         all_backgrounds = pg.sprite.Group()
@@ -920,7 +899,7 @@ while not done:
         Text.mkText("And all was good.", mainFont, colors.WHITE, 18, 1, 1)
         done = True
 
-    if stage is 16:
+    elif stage is 16:
         if (current_x > 2500 or current_x < -2500 or current_y > 2500 or current_y < -2500):
             all_text = []
             all_walls = pg.sprite.Group()
@@ -972,6 +951,28 @@ while not done:
             Text.mkText("And all was good.", mainFont, colors.RED_1, 18, 1, 1)
 
             done = True
+
+    if stage < 8:
+        if history[4] is True and current_x in range(0, 160) and current_y in range(0, 160):
+            stage = 1
+            timer1_time = 60000
+
+    if stage in range(4, 9):
+        if current_x in range(1830, 1840) and current_y in range(150, 350):
+            all_text = []
+            stage = 10
+            Text.mkText('At the end of this hall was an elavator which would take him to the above floor.', mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText('Maybe there he would find an answer on what to do next.', mainFont, colors.WHITE, 18, 2, 2)
+            Build.mkRoom(1740, 245, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
+            Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
+
+    if stage < 11:
+        if current_x in range(2200, 2250) and current_y > 130:
+            all_text = []
+
+        if current_x in range(2675, 2725) and current_y in range(420, 430):
+            stage = 11
+
 
     # Here are the list of captions in the game.
     if pg.key.get_pressed()[pg.K_SPACE] is 1:
