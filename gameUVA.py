@@ -492,6 +492,4 @@ while not done:
     World.update()
     clock.tick(60)
 
-    print(current_x, current_y)
-
 pg.quit()

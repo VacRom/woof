@@ -592,6 +592,9 @@ while not done:
         all_backgrounds = pg.sprite.Group()
         all_sprites = pg.sprite.Group()
 
+        pg.mixer.music.fadeout(1)
+
+
     if event.type is pg.KEYDOWN and event.key is pg.K_2:
         history[stage] = False
         stage = 1
@@ -601,6 +604,9 @@ while not done:
         all_walls = pg.sprite.Group()
         all_backgrounds = pg.sprite.Group()
         all_sprites = pg.sprite.Group()
+
+        pg.mixer.music.fadeout(1)
+
 
     if event.type is pg.KEYDOWN and event.key is pg.K_3:
         history[stage] = False
@@ -623,7 +629,12 @@ while not done:
         all_backgrounds = pg.sprite.Group()
         all_sprites = pg.sprite.Group()
 
+        pg.mixer.music.fadeout(1)
+
     if event.type is pg.KEYDOWN and event.key is pg.K_5:
+
+        pg.mixer.music.fadeout(1)
+
         history[stage] = False
         stage = 4
         current_x = 80
