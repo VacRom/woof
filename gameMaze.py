@@ -11,7 +11,7 @@ import random
 class Actor(pg.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pg.Surface([25, 25])
+        self.image = pg.Surface([player_size, player_size])
         self.image.fill(colors.RED)
         self.rect = self.image.get_rect()
         self.rect.x = center_x-player_center
@@ -146,34 +146,25 @@ class Build():
             wallLeft = Wall(x, y, t, h, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
             all_walls.add(wallLeft)
             all_walls.add(wallRight)
             all_walls.add(wallBottom)
-            all_backgrounds.add(floor)
 
         elif version is 'background':
-            floor = Background(x, y, w, h, floorColor)
-            all_backgrounds.add(floor)
+            pass
 
         elif version is 'wall_1':
             wallTop = Wall(x, y, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
-            all_backgrounds.add(floor)
 
         elif version is 'wall_2':
             wallRight = Wall(x+w-t, y, t, h, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallRight)
-            all_backgrounds.add(floor)
 
         elif version is 'wall_3':
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallBottom)
-            all_backgrounds.add(floor)
 
         elif version is 'wall_4':
             wallLeft = Wall(x, y, t, h, wallColor)
@@ -184,90 +175,71 @@ class Build():
         elif version is 'hall_1':
             wallLeft = Wall(x, y, t, h, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallLeft)
             all_walls.add(wallRight)
-            all_backgrounds.add(floor)
 
         elif version is 'hall_2':
             wallTop = Wall(x, y, w, t, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
             all_walls.add(wallBottom)
-            all_backgrounds.add(floor)
 
         elif version is 'corner_1':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
             all_walls.add(wallLeft)
-            all_backgrounds.add(floor)
 
         elif version is 'corner_2':
             wallTop = Wall(x, y, w, t, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
             all_walls.add(wallRight)
-            all_backgrounds.add(floor)
 
         elif version is 'corner_3':
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallRight)
             all_walls.add(wallBottom)
-            all_backgrounds.add(floor)
 
         elif version is 'corner_4':
             wallLeft = Wall(x, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallLeft)
             all_walls.add(wallBottom)
-            all_backgrounds.add(floor)
 
         elif version is 'end_1':
             wallLeft = Wall(x, y, t, h, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallLeft)
             all_walls.add(wallRight)
             all_walls.add(wallBottom)
-            all_backgrounds.add(floor)
 
         elif version is 'end_2':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
             all_walls.add(wallLeft)
             all_walls.add(wallBottom)
-            all_backgrounds.add(floor)
 
         elif version is 'end_3':
             wallTop = Wall(x, y, w, t, wallColor)
             wallLeft = Wall(x, y, t, h, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
             all_walls.add(wallLeft)
             all_walls.add(wallRight)
-            all_backgrounds.add(floor)
 
         elif version is 'end_4':
             wallTop = Wall(x, y, w, t, wallColor)
             wallRight = Wall(x+w-t, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
-            floor = Background(x, y, w, h, floorColor)
             all_walls.add(wallTop)
             all_walls.add(wallRight)
             all_walls.add(wallBottom)
-            all_backgrounds.add(floor)
+
 
 
 class World():
@@ -275,7 +247,7 @@ class World():
         all_walls.update()
         all_backgrounds.update()
         all_actors.update()
-        screen.fill(colors.BLACK)
+        screen.fill(colors.BROWN)
         all_backgrounds.draw(screen)
         all_walls.draw(screen)
         all_actors.draw(screen)
@@ -315,13 +287,13 @@ stage = 0
 
 screen_x = 900
 screen_y = 600
-initial_x = 500+5
-initial_y = 500+5
-player_size = 25
-thickness = 10
-map_x = 3000
-map_y = 3000
-room_size = 50
+player_size = 5
+thickness = 3
+map_x = 1000
+map_y = 1000
+initial_x = int(map_x/2)
+initial_y = int(map_y/2)
+room_size = 15
 
 mainFont = pg.font.SysFont('oldstandard', 18)
 secondFont = pg.font.SysFont('ptsans', 18)
@@ -347,8 +319,8 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
+#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
 pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 clock = pg.time.Clock()

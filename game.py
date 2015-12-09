@@ -15,7 +15,7 @@ import colors
 class Actor(pg.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pg.Surface([25, 25])
+        self.image = pg.Surface([player_size, player_size])
         self.image.fill(colors.RED)
         self.rect = self.image.get_rect()
         self.rect.x = center_x-player_center
@@ -358,7 +358,7 @@ all_caption = []
 
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-stage = 1
+stage = 0
 
 screen_x = 900
 screen_y = 600
@@ -389,8 +389,8 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
-#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
 pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 clock = pg.time.Clock()
