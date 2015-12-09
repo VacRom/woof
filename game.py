@@ -251,7 +251,7 @@ class Build():
             all_walls.add(wallBottom)
             all_backgrounds.add(floor)
 
-        if version is 'corner_4':
+        elif version is 'corner_4':
             wallLeft = Wall(x, y, t, h, wallColor)
             wallBottom = Wall(x, y+h-t, w, t, wallColor)
             floor = Background(x, y, w, h, floorColor)
@@ -344,7 +344,7 @@ all_caption = []
 
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-stage = 0
+stage = 1
 
 screen_x = 900
 screen_y = 600
@@ -393,216 +393,223 @@ while not done:
 
 # Begin the story here.
 
-    if stage is 0 and history[0] is False:
-        history[0] = True
+    if stage is 0:
+        if history[0] is False:
+            history[0] = True
 
-        pg.event.set_allowed(None)
-        World.music('track_1.mp3')
-        World.update()
+            pg.event.set_allowed(None)
+            World.music('track_1.mp3')
+            World.update()
 
-        Text.mkText('This is the story of Red.', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText('Red is a simple shape, and he leads a simple life.', mainFont, colors.WHITE, 18, 2, 0)
+            Text.mkText('This is the story of Red.', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText('Red is a simple shape, and he leads a simple life.', mainFont, colors.WHITE, 18, 2, 0)
 
-        Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
-        World.update()
+            Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
+            World.update()
 
-        Text.mkText('Here is his office. It is his very own, and he is very glad to be in it.', mainFont, colors.WHITE, 18, 3, 1)
+            Text.mkText('Here is his office. It is his very own, and he is very glad to be in it.', mainFont, colors.WHITE, 18, 3, 1)
 
-        Text.mkText('For an uncountable number of days, Red sat in this office', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText('completing a number of different assignments.', mainFont, colors.WHITE, 18, 2, 1)
+            Text.mkText('For an uncountable number of days, Red sat in this office', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText('completing a number of different assignments.', mainFont, colors.WHITE, 18, 2, 1)
 
-        Text.mkText("Today's assignment was to stare at this wall", mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText("which he enjoyed far more than yesterday's assignment:", mainFont, colors.WHITE, 18, 2, 0)
-        Text.mkText('to stare at the ceiling.', mainFont, colors.WHITE, 18, 3, 1)
+            Text.mkText("Today's assignment was to stare at this wall", mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText("which he enjoyed far more than yesterday's assignment:", mainFont, colors.WHITE, 18, 2, 0)
+            Text.mkText('to stare at the ceiling.', mainFont, colors.WHITE, 18, 3, 1)
 
-        Text.mkText('Although Red did not always understand why he continued with these tasks', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText('he decided to not question the assignment makers.', mainFont, colors.WHITE, 18, 2, 0)
-        Text.mkText('After all, Red has always lived his life in this way.', mainFont, colors.WHITE, 18, 3, 1)
+            Text.mkText('Although Red did not always understand why he continued with these tasks', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText('he decided to not question the assignment makers.', mainFont, colors.WHITE, 18, 2, 0)
+            Text.mkText('After all, Red has always lived his life in this way.', mainFont, colors.WHITE, 18, 3, 1)
 
-        Text.mkText('Life is simple in this room - unlike the confusing world out there', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText('with all those difficult decisions that are needed to be made.', mainFont, colors.WHITE, 18, 2, 0)
-        Text.mkText('No, Red did not bother himself with those things in life.', mainFont, colors.WHITE, 18, 3, 1)
+            Text.mkText('Life is simple in this room - unlike the confusing world out there', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText('with all those difficult decisions that are needed to be made.', mainFont, colors.WHITE, 18, 2, 0)
+            Text.mkText('No, Red did not bother himself with those things in life.', mainFont, colors.WHITE, 18, 3, 1)
 
-        Text.mkText('And so, Red stared and stared and stared...', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText('and stared and stared...', mainFont, colors.WHITE, 18, 2, 0)
-        Text.mkText('and most importantly, did not leave the room.', mainFont, colors.WHITE, 18, 3, 1)
+            Text.mkText('And so, Red stared and stared and stared...', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText('and stared and stared...', mainFont, colors.WHITE, 18, 2, 0)
+            Text.mkText('and most importantly, did not leave the room.', mainFont, colors.WHITE, 18, 3, 1)
 
-        pg.event.set_blocked(None)
+            pg.event.set_blocked(None)
 
-        all_walls = pg.sprite.Group()
-        all_backgrounds = pg.sprite.Group()
-        stage = 1
+            all_walls = pg.sprite.Group()
+            all_backgrounds = pg.sprite.Group()
+            stage = 1
 
-    if stage is 1 and history[1] is False:
-        history[1] = True
+    if stage is 1:
+        if history[1] is False:
+            history[1] = True
 
-        'Starting office'
-        Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'end_3')
-        Build.mkRoom(0, 145, 15, 60, 15, colors.BROWN_0, colors.BLUE, 'box')
-        Build.mkRoom(100, 145, 15, 60, 15, colors.BROWN_0, colors.BLUE, 'box')
+            'Starting office'
+            Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'end_3')
+            Build.mkRoom(0, 145, 15, 60, 15, colors.BROWN_0, colors.BLUE, 'box')
+            Build.mkRoom(100, 145, 15, 60, 15, colors.BROWN_0, colors.BLUE, 'box')
 
-        'Closed offices'
-        Build.mkRoom(200, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
-        Build.mkRoom(400, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
-        Build.mkRoom(600, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
-        Build.mkRoom(-210, 105, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
-        Build.mkRoom(0, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
-        Build.mkRoom(200, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
-        Build.mkRoom(400, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
-        Build.mkRoom(600, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+            'Closed offices'
+            Build.mkRoom(200, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+            Build.mkRoom(400, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+            Build.mkRoom(600, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+            Build.mkRoom(-210, 105, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+            Build.mkRoom(0, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+            Build.mkRoom(200, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+            Build.mkRoom(400, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
+            Build.mkRoom(600, 210, 15, 160, 160, colors.BROWN_0, colors.BROWN_1, 'box')
 
-        'Hallway'
-        Build.mkRoom(100, 145, 15, 750, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
-        Build.mkRoom(-50, 145, 15, 115, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
-        Build.mkRoom(0, 145, 15, 160, 80, colors.BROWN_0, colors.BROWN, 'wall_3')
+            'Hallway'
+            Build.mkRoom(100, 145, 15, 750, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
+            Build.mkRoom(-50, 145, 15, 115, 80, colors.BROWN_0, colors.BROWN, 'hall_2')
+            Build.mkRoom(0, 145, 15, 160, 80, colors.BROWN_0, colors.BROWN, 'wall_3')
 
-        'Main Room'
-        Build.mkRoom(835, -55, 15, 900, 215, colors.BROWN_0, colors.BROWN, 'corner_1')
-        Build.mkRoom(835, 210, 15, 900, 215, colors.BROWN_0, colors.BROWN, 'corner_4')
-        Build.mkRoom(835, 150, 0, 900, 100, colors.BROWN_0, colors.BROWN, 'background')
-        Build.mkRoom(1735, -55, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
-        Build.mkRoom(1735, -55+2*96, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
-        Build.mkRoom(1735, -55+4*96, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
+            'Main Room'
+            Build.mkRoom(835, -55, 15, 900, 215, colors.BROWN_0, colors.BROWN, 'corner_1')
+            Build.mkRoom(835, 210, 15, 900, 215, colors.BROWN_0, colors.BROWN, 'corner_4')
+            Build.mkRoom(835, 150, 0, 900, 100, colors.BROWN_0, colors.BROWN, 'background')
+            Build.mkRoom(1735, -55, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
+            Build.mkRoom(1735, -55+2*96, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
+            Build.mkRoom(1735, -55+4*96, 15, 15, 96, colors.BROWN_0, colors.BROWN, 'wall_2')
 
-        'Top Door'
-        Build.mkRoom(1735, -55+1*96, 15, 800, 96, colors.BROWN_0, colors.BROWN, 'hall_2')
+            'Top Door'
+            Build.mkRoom(1735, -55+1*96, 15, 800, 96, colors.BROWN_0, colors.BROWN, 'hall_2')
 
-        'Bottom Door'
-        Build.mkRoom(1735, -55+3*96, 15, 800, 96, colors.BROWN_0, colors.BROWN, 'hall_2')
+            'Bottom Door'
+            Build.mkRoom(1735, -55+3*96, 15, 800, 96, colors.BROWN_0, colors.BROWN, 'hall_2')
 
-        'Door Colors'
-        Build.mkRoom(1735, -55+1*96-30, 15, 96, 30, colors.RED_3, colors.RED_3, 'background')
-        Build.mkRoom(1735, -55+2*96, 15, 96, 30, colors.RED_3, colors.RED_3, 'background')
+            'Door Colors'
+            Build.mkRoom(1735, -55+1*96-30, 15, 96, 30, colors.RED_3, colors.RED_3, 'background')
+            Build.mkRoom(1735, -55+2*96, 15, 96, 30, colors.RED_3, colors.RED_3, 'background')
 
-        Build.mkRoom(1735, -55+3*96-30, 15, 96, 30, colors.BLUE_3, colors.BLUE_3, 'background')
-        Build.mkRoom(1735, -55+4*96, 15, 96, 30, colors.BLUE_3, colors.BLUE_3, 'background')
+            Build.mkRoom(1735, -55+3*96-30, 15, 96, 30, colors.BLUE_3, colors.BLUE_3, 'background')
+            Build.mkRoom(1735, -55+4*96, 15, 96, 30, colors.BLUE_3, colors.BLUE_3, 'background')
 
-        'Second Room'
-        Build.mkRoom(2535, -55, 15, 350, 400, colors.BROWN_0, colors.BROWN, 'corner_2')
-        Build.mkRoom(2535, -55, 15, 15, 96+15, colors.BROWN_0, colors.BROWN, 'box')
-        Build.mkRoom(2535, -55+96*2-15, 15, 15, 96+30, colors.BROWN_0, colors.BROWN, 'box')
-        Build.mkRoom(2535, -55+96*4-15, 15, 150, 96, colors.BROWN_0, colors.BROWN, 'corner_4')
-        Build.mkRoom(2735, -55+96*4-15, 15, 150, 96, colors.BROWN_0, colors.BROWN, 'corner_3')
-        Build.mkRoom(2635, -55+96*4-15, 0, 150, 96, colors.BROWN_0, colors.BROWN, 'background')
-        Build.mkRoom(2675, -55+96*5-15, 5, 72, 48, colors.BLUE_1, colors.BLUE_3, 'end_1')
+            'Second Room'
+            Build.mkRoom(2535, -55, 15, 350, 400, colors.BROWN_0, colors.BROWN, 'corner_2')
+            Build.mkRoom(2535, -55, 15, 15, 96+15, colors.BROWN_0, colors.BROWN, 'box')
+            Build.mkRoom(2535, -55+96*2-15, 15, 15, 96+30, colors.BROWN_0, colors.BROWN, 'box')
+            Build.mkRoom(2535, -55+96*4-15, 15, 150, 96, colors.BROWN_0, colors.BROWN, 'corner_4')
+            Build.mkRoom(2735, -55+96*4-15, 15, 150, 96, colors.BROWN_0, colors.BROWN, 'corner_3')
+            Build.mkRoom(2635, -55+96*4-15, 0, 150, 96, colors.BROWN_0, colors.BROWN, 'background')
+            Build.mkRoom(2675, -55+96*5-15, 5, 72, 48, colors.BLUE_1, colors.BLUE_3, 'end_1')
 
-        timer1_time = 0
-        timer1 = pg.time.Clock()
+            timer1_time = 0
+            timer1 = pg.time.Clock()
 
-    if stage is 1 and current_y > 158:
-        stage = 2
+        if current_y > 158:
+            stage = 2
 
-    if stage is 1 and timer1_time > 60000:
-        pg.event.set_allowed(None)
-        pg.mixer.music.fadeout(2000)
-        all_text = []
-        screen.fill(colors.BLACK)
-        pg.display.flip()
-        Text.mkText('And all was good.', mainFont, colors.WHITE, 18, 1, 1)
-        done = True
+        if timer1_time > 60000:
+            pg.event.set_allowed(None)
+            pg.mixer.music.fadeout(2000)
+            all_text = []
+            screen.fill(colors.BLACK)
+            pg.display.flip()
+            Text.mkText('And all was good.', mainFont, colors.WHITE, 18, 1, 1)
+            done = True
 
-    if stage is 2 and history[2] is False:
-        history[2] = True
-        Text.mkText('Filled with curiosity, Red did the unimaginable:', mainFont, colors.WHITE, 18, 1, 2)
-        Text.mkText('he left the room. Red had never made a decision for himself before,', mainFont, colors.WHITE, 18, 2, 2)
-        Text.mkText('and he felt uneasy as he walked down this hallway.', mainFont, colors.WHITE, 18, 3, 2)
+    if stage is 2:
+        if history[2] is False:
+            history[2] = True
+            Text.mkText('Filled with curiosity, Red did the unimaginable:', mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText('he left the room. Red had never made a decision for himself before,', mainFont, colors.WHITE, 18, 2, 2)
+            Text.mkText('and he felt uneasy as he walked down this hallway.', mainFont, colors.WHITE, 18, 3, 2)
 
-    if stage is 2 and current_x > 250:
-        stage = 3
+        if current_x > 250:
+            stage = 3
 
-    if stage is 3 and history[3] is False:
-        history[3] = True
-        World.music('track_2.mp3')
-        all_text = []
+    if stage is 3:
+        if history[3] is False:
+            history[3] = True
+            World.music('track_2.mp3')
+            all_text = []
 
-    if stage is 3 and current_x > 500:
-        stage = 4
+        if current_x > 500:
+            stage = 4
 
-    if stage is 4 and history[4] is False:
-        history[4] = True
-        Text.mkText('Red found it odd that the others rooms around him were locked.', mainFont, colors.WHITE, 18, 1, 2)
-        Text.mkText('Was he the only one here? Red needed to find out.', mainFont, colors.WHITE, 18, 2, 2)
+    if stage is 4:
+        if history[4] is False:
+            history[4] = True
+            Text.mkText('Red found it odd that the others rooms around him were locked.', mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText('Was he the only one here? Red needed to find out.', mainFont, colors.WHITE, 18, 2, 2)
 
-    if current_x in range(750, 800):
-        all_text = []
+        if current_x > 1000:
+            all_text = []
+            stage = 5
 
-    if history[4] is True and current_x in range(0, 160) and current_y in range(0, 160) and stage < 8:
-        stage = 1
-        timer1_time = 60000
+    if stage < 8:
+        if history[4] is True and current_x in range(0, 160) and current_y in range(0, 160):
+            stage = 1
+            timer1_time = 60000
 
-    if stage is 4 and current_x > 1000:
-        all_text = []
-        stage = 5
+    if stage is 5:
+        if current_x > 1400 and history[5] is False:
+            history[5] = True
+            Text.mkText('Upon reaching the two doors, Red made the decision to enter into', mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText('the blue door.', mainFont, colors.WHITE, 18, 2, 2)
+            stage = 6
 
-    if stage is 5 and current_x > 1400 and history[5] is False:
-        history[5] = True
-        Text.mkText('Upon reaching the two doors, Red made the decision to enter into', mainFont, colors.WHITE, 18, 1, 2)
-        Text.mkText('the blue door.', mainFont, colors.WHITE, 18, 2, 2)
-        stage = 6
+    if stage is 6:
+        if current_x in range(1830, 1840) and current_y in range(30, 120):
+            history[6] = True
+            all_text = []
+            dx = +200
+            dy = -100
+            World.update()
+            Text.mkText('Red entered into the blue door.', mainFont, colors.WHITE, 18, 1, 2)
+            stage = 7
 
-    if stage is 6 and current_x in range(1830, 1840) and current_y in range(30, 120):
-        history[6] = True
-        all_text = []
-        dx = +200
-        dy = -100
-        World.update()
-        Text.mkText('Red entered into the blue door.', mainFont, colors.WHITE, 18, 1, 2)
-        stage = 7
+    if stage is 7:
+        if current_x in range(1830, 1840) and current_y in range(30, 120) and history[7] is False:
+            history[7] = True
+            all_text = []
+            dx = +200
+            dy = -100
+            all_walls.update()
+            all_backgrounds.update()
+            all_actors.update()
 
-    if stage is 7 and current_x in range(1830, 1840) and current_y in range(30, 120) and history[7] is False:
-        history[7] = True
-        all_text = []
-        dx = +200
-        dy = -100
-        all_walls.update()
-        all_backgrounds.update()
-        all_actors.update()
+            Text.mkText('Red learned a valuable lesson on the inconvenience of colorblindness.', mainFont, colors.WHITE, 18, 1, 2)
+            Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
+            Build.mkRoom(800, 110, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
+            Build.mkRoom(800, 110+96+15, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
+            stage = 8
 
-        Text.mkText('Red learned a valuable lesson on the inconvenience of colorblindness.', mainFont, colors.WHITE, 18, 1, 2)
-        Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
-        Build.mkRoom(800, 110, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
-        Build.mkRoom(800, 110+96+15, 15, 40, 35, colors.RED_3, colors.RED_3, 'background')
-        stage = 8
+    if stage is 8:
+        if current_x < 800 and history[8] is False:
+            history[8] = True
 
-    if stage is 8 and current_x < 800 and history[8] is False:
-        history[8] = True
+            pg.event.set_allowed(None)
 
-        pg.event.set_allowed(None)
+            all_text = []
+            all_walls = pg.sprite.Group()
+            all_backgrounds = pg.sprite.Group()
+            all_sprites = pg.sprite.Group()
 
-        all_text = []
-        all_walls = pg.sprite.Group()
-        all_backgrounds = pg.sprite.Group()
-        all_sprites = pg.sprite.Group()
+            current_x = 80
+            current_y = 30
 
-        current_x = 80
-        current_y = 30
+            World.update()
+            World.music('track_1.mp3')
 
-        World.update()
-        World.music('track_1.mp3')
+            Text.mkText('This is the story of Red.', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText('Red is incapable of listening to others.', mainFont, colors.WHITE, 18, 2, 0)
 
-        Text.mkText('This is the story of Red.', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText('Red is incapable of listening to others.', mainFont, colors.WHITE, 18, 2, 0)
+            Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
+            World.update()
 
-        Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
-        World.update()
+            Text.mkText('Here he is all alone in his office.', mainFont, colors.WHITE, 18, 3, 1)
 
-        Text.mkText('Here he is all alone in his office.', mainFont, colors.WHITE, 18, 3, 1)
+            Text.mkText('Did you know the color red symbolizes braveness?', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText('And also arrogance. I thought you should know that.', mainFont, colors.WHITE, 18, 2, 1)
 
-        Text.mkText('Did you know the color red symbolizes braveness?', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText('And also arrogance. I thought you should know that.', mainFont, colors.WHITE, 18, 2, 1)
+            Text.mkText("This aside, clearly Red does not understand the consequences", mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText("of making incorrect decisions. Well, how about this:", mainFont, colors.WHITE, 18, 2, 1)
 
-        Text.mkText("This aside, clearly Red does not understand the consequences", mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText("of making incorrect decisions. Well, how about this:", mainFont, colors.WHITE, 18, 2, 1)
+            Text.mkText('Red did whatever he wanted.', mainFont, colors.WHITE, 18, 1, 1)
 
-        Text.mkText('Red did whatever he wanted.', mainFont, colors.WHITE, 18, 1, 1)
+            pg.event.set_blocked(None)
 
-        pg.event.set_blocked(None)
+            all_walls = pg.sprite.Group()
+            all_backgrounds = pg.sprite.Group()
 
-        all_walls = pg.sprite.Group()
-        all_backgrounds = pg.sprite.Group()
-
-        Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
-        stage = 9
+            Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
+            stage = 9
 
     if stage is 9:
         if history[9] is False:
@@ -652,218 +659,225 @@ while not done:
         if timer1_time > 315000:
             stage = 11
 
-    if stage in range(4, 9) and current_x in range(1830, 1840) and current_y in range(150, 350):
-        all_text = []
-        stage = 10
-        Text.mkText('At the end of this hall was an elavator which would take him to the above floor.', mainFont, colors.WHITE, 18, 1, 2)
-        Text.mkText('Maybe there he would find an answer on what to do next.', mainFont, colors.WHITE, 18, 2, 2)
-        Build.mkRoom(1740, 245, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
-        Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
-
-    if stage is 10 and current_x in range(1900, 2000) and current_y in range(60, 120) and history[10] is False:
-        history[10] = True
-        all_text = []
-        Text.mkText('That was really pointless, Red.', mainFont, colors.WHITE, 18, 1, 2)
-        Text.mkText('Really, really, pointless.', mainFont, colors.WHITE, 18, 2, 2)
-
-    if stage is 10 and current_x in range(2400, 2500) and current_y in range(60, 120):
-        all_text = []
-
-    if stage < 11 and current_x in range(2200, 2250) and current_y > 130:
-        all_text = []
-
-    if current_x in range(2675, 2725) and current_y in range(420, 430):
-        stage = 11
-
-    if stage is 11 and history[11] is False:
-        history[11] = True
-        timer1 = pg.time.Clock()
-        timer1_time = 0
-        all_text = []
-        all_walls = pg.sprite.Group()
-        all_backgrounds = pg.sprite.Group()
-        all_sprites = pg.sprite.Group()
-        screen.fill(colors.BLACK)
-        World.music('track_5.mp3')
-        current_x = 0
-        current_y = 0
-        World.update()
-        pg.event.set_allowed(None)
-
-        Text.mkText('Red stepped into the elavator, and the doors shut behind him.', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText('Strangely, the machine had no buttons. Instead, it began to move on its own,', mainFont, colors.WHITE, 18, 2, 0)
-        Text.mkText('almost as if the destination were already decided for him.', mainFont, colors.WHITE, 18, 3, 1)
-
-        Text.mkText('Red wished that the doors would never open:', mainFont, colors.WHITE, 18, 1, 0)
-        Text.mkText("at the very least, in here there are no choices to be made.", mainFont, colors.WHITE, 18, 2, 1)
-
-        Text.mkText('Moreover, what purpose would an elevator serve if it did not do as it was ordered?', mainFont, colors.WHITE, 18, 1, 1)
-
-        pg.mixer.music.fadeout(3000)
-
-        Text.mkText('The doors opened.', mainFont, colors.WHITE, 18, 1, 1)
-
-        World.music('track_6.mp3')
-
-        'First Hall'
-        Build.mkRoom(-36, -24, 5, 72, 48, colors.BLUE_1, colors.BLUE_3, 'end_1')
-        Build.mkRoom(-55, -348, 15, 112, 324, colors.BROWN_0, colors.RED_3, 'hall_1')
-        Build.mkRoom(-40, -39, 15, 15, 15, colors.BROWN_0, colors.RED_3, 'box')
-        Build.mkRoom(27, -39, 15, 15, 15, colors.BROWN_0, colors.RED_3, 'box')
-        Build.mkRoom(-55-15, -460, 15, 112, 112, colors.BROWN_0, colors.RED_3, 'background')
-
-        'North Hall'
-        Build.mkRoom(-55, -760, 15, 112, 300, colors.BROWN_0, colors.RED_3, 'hall_1')
-
-        'Office'
-        Build.mkRoom(-55-112, -760-336, 15, 336, 336, colors.BROWN_0, colors.RED_3, 'hall_1')
-        Build.mkRoom(-55-112, -760-336, 15, 112+15, 336, colors.BROWN_0, colors.RED_3, 'wall_3')
-        Build.mkRoom(-55+112-15, -760-336, 15, 112+15, 336, colors.BROWN_0, colors.RED_3, 'wall_3')
-
-        'White door'
-        Build.mkRoom(-55-112+168-13, -760-336-40, 15, 25, 25, colors.WHITE, colors.WHITE, 'background')
-
-        'West Hall'
-        Build.mkRoom(-55-300-1700, -348-112, 15, 300+15+1700, 112, colors.BROWN_0, colors.RED_3, 'hall_2')
-        Build.mkRoom(-55-300-1700-112, -348-112, 15, 112, 112, colors.BROWN_0, colors.BLACK, 'end_2')
-
-        'East Hall'
-        Build.mkRoom(-55+112-15, -348-112, 15, 1000, 112, colors.BROWN_0, colors.RED_3, 'hall_2')
-        if history[8] is False:
-            Build.mkRoom(-55, -348-112, 15, 116, 112, colors.BROWN_0, colors.RED_3, 'wall_2')
-
-        'Rooms'
-        Build.mkRoom(-200, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-400, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-600, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-800, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1000, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1200, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1400, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1600, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1800, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-2000, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-
-        Build.mkRoom(-200, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-400, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-600, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-800, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1000, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1200, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1400, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1600, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-1800, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(-2000, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-
-        Build.mkRoom(-200+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(0+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(200+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(400+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(600+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(800+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(1000+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-
-        Build.mkRoom(-200+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(0+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(200+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(400+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(600+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(800+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-        Build.mkRoom(1000+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
-
-        pg.event.set_blocked(None)
-
-        stage = 12
-
-    if stage is 12 and current_y < -300 and history[13] is False:
-        history[13] = True
-        Text.mkText('Red continued directly down the hall towards his boss room.', mainFont, colors.WHITE, 18, 1, 2)
-        Text.mkText("He'd finally discover exactly what he needs to do.", mainFont, colors.WHITE, 18, 2, 2)
-        stage = 13
-
-    if stage is 13 and current_y < -530:
-        Build.mkRoom(-55, -460-6, 15, 112, 112, colors.BROWN_0, colors.RED_3, 'wall_1')
-        all_text = []
-        Text.mkText('Red walked into the next room and discovered the truth.', mainFont, colors.WHITE, 18, 1, 2)
-        stage = 14
-
-    if stage is 14 and current_y < -770:
-        stage = 15
-
-    if stage is 13 and current_y in range(-460, -340):
-        if current_x < -100 and history[30] is False:
-            history[30] = True
+    if stage in range(4, 9):
+        if current_x in range(1830, 1840) and current_y in range(150, 350):
             all_text = []
-            Text.mkText('Red walked down the West hallway', mainFont, colors.WHITE, 18, 1, 2)
-            Text.mkText('which is also known as the Wrong Hallway.', mainFont, colors.WHITE, 18, 2, 2)
-        if current_x < -400 and history[31] is False:
-            history[31] = True
-            all_text = []
-            Text.mkText('What Red did not know was that this hallway, was in fact,', mainFont, colors.WHITE, 18, 1, 2)
-            Text.mkText('was filled with thousands of extremely venomous spiders.', mainFont, colors.WHITE, 18, 2, 2)
-        if current_x < -700 and history[32] is False:
-            history[32] = True
-            Text.mkText("... and a clown.", mainFont, colors.WHITE, 18, 3, 2)
+            stage = 10
+            Text.mkText('At the end of this hall was an elavator which would take him to the above floor.', mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText('Maybe there he would find an answer on what to do next.', mainFont, colors.WHITE, 18, 2, 2)
+            Build.mkRoom(1740, 245, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
+            Build.mkRoom(1740, 245-96*2, 15, 15, 96-15, colors.BROWN_0, colors.BROWN_0, 'box')
 
-        if current_x < -1000 and history[33] is False:
-            history[33] = True
+    if stage is 10:
+        if current_x in range(1900, 2000) and current_y in range(60, 120) and history[10] is False:
+            history[10] = True
             all_text = []
-            Text.mkText("It is determined that the company's clown detecting device must be dysfunctional.", mainFont, colors.WHITE, 18, 1, 2)
-            Text.mkText("All that's currently in this hallway is Red.", mainFont, colors.WHITE, 18, 2, 2)
+            Text.mkText('That was really pointless, Red.', mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText('Really, really, pointless.', mainFont, colors.WHITE, 18, 2, 2)
 
-        if current_x < -1300 and history[34] is False:
-            history[34] = True
-            all_text = []
-            Text.mkText("Not that Red would have known, but his superiors have been keeping", mainFont, colors.WHITE, 18, 1, 2)
-            Text.mkText("a record on his recent performance. It says: failure.", mainFont, colors.WHITE, 18, 2, 2)
-
-        if current_x < -1600 and history[35] is False:
-            history[35] = True
-            all_text = []
-            Text.mkText("It's odd that someone would take the effort to write 'failure' a thousand times.", mainFont, colors.WHITE, 18, 1, 2)
-            Text.mkText("It's fortunate that Red would have no means of ever discovering these records.", mainFont, colors.WHITE, 18, 2, 2)
-
-        if current_x < -1900 and history[36] is False:
-            history[36] = True
-            all_text = []
-            Text.mkText("This is a pit. Why there's a pit here is nobody's business - except maybe", mainFont, colors.WHITE, 18, 1, 2)
-            Text.mkText("the safety manager. But he fell into the pit last week and now he is no more.", mainFont, colors.WHITE, 18, 2, 2)
-            Text.mkText("Even Red knew the consequences of attempting to walk over a pit.", mainFont, colors.WHITE, 18, 3, 2)
-
-        if current_x > -1700 and history[36] is True and history[37] is False:
-            history[37] = True
+        if current_x in range(2400, 2500) and current_y in range(60, 120):
             all_text = []
 
-        if current_x > -300 and history[37] is True and history[38] is False:
-            history[38] = True
-            Text.mkText("Red walked into the North hallway.", mainFont, colors.WHITE, 18, 1, 2)
-
-        if current_x in range(-2060, -2050) and history[36] is True:
-            pg.event.set_allowed(None)
+    if stage < 11:
+        if current_x in range(2200, 2250) and current_y > 130:
             all_text = []
+
+        if current_x in range(2675, 2725) and current_y in range(420, 430):
+            stage = 11
+
+    if stage is 11:
+        if history[11] is False:
+            history[11] = True
+            timer1 = pg.time.Clock()
+            timer1_time = 0
+            all_text = []
+            all_walls = pg.sprite.Group()
+            all_backgrounds = pg.sprite.Group()
+            all_sprites = pg.sprite.Group()
             screen.fill(colors.BLACK)
-            pg.display.flip()
-            Text.mkText("Red's decision was subpar.", mainFont, colors.WHITE, 18, 1, 1)
-            done = True
+            World.music('track_5.mp3')
+            current_x = 0
+            current_y = 0
+            World.update()
+            pg.event.set_allowed(None)
 
-    if stage is 13 and current_y in range(-460, -340) and current_x > 170 and history[40] is False:
-        history[40] = True
-        all_text= []
-        Text.mkText("Wait, that door's not supposed to be open.", mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText('Red stepped into the elavator, and the doors shut behind him.', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText('Strangely, the machine had no buttons. Instead, it began to move on its own,', mainFont, colors.WHITE, 18, 2, 0)
+            Text.mkText('almost as if the destination were already decided for him.', mainFont, colors.WHITE, 18, 3, 1)
 
-    if stage is 13 and current_y in range(-460, -340) and current_x > 470 and history[41] is False:
-        history[41] = True
-        all_text = []
-        Text.mkText("I'm warning you! Don't go there.", mainFont, colors.WHITE, 18, 1, 2)
-        Text.mkText("If you go any further you're going to break the game!", mainFont, colors.WHITE, 18, 2, 2)
+            Text.mkText('Red wished that the doors would never open:', mainFont, colors.WHITE, 18, 1, 0)
+            Text.mkText("at the very least, in here there are no choices to be made.", mainFont, colors.WHITE, 18, 2, 1)
 
-    if stage is 13 and current_y in range(-460, -340) and current_x > 770 and history[42] is False:
-        history[42] = True
-        all_text = []
+            Text.mkText('Moreover, what purpose would an elevator serve if it did not do as it was ordered?', mainFont, colors.WHITE, 18, 1, 1)
 
-    if stage is 13 and current_x > 1000:
-        pg.mixer.music.fadeout(1)
-        stage = 16
+            pg.mixer.music.fadeout(3000)
+
+            Text.mkText('The doors opened.', mainFont, colors.WHITE, 18, 1, 1)
+
+            World.music('track_6.mp3')
+
+            'First Hall'
+            Build.mkRoom(-36, -24, 5, 72, 48, colors.BLUE_1, colors.BLUE_3, 'end_1')
+            Build.mkRoom(-55, -348, 15, 112, 324, colors.BROWN_0, colors.RED_3, 'hall_1')
+            Build.mkRoom(-40, -39, 15, 15, 15, colors.BROWN_0, colors.RED_3, 'box')
+            Build.mkRoom(27, -39, 15, 15, 15, colors.BROWN_0, colors.RED_3, 'box')
+            Build.mkRoom(-55-15, -460, 15, 112, 112, colors.BROWN_0, colors.RED_3, 'background')
+
+            'North Hall'
+            Build.mkRoom(-55, -760, 15, 112, 300, colors.BROWN_0, colors.RED_3, 'hall_1')
+
+            'Office'
+            Build.mkRoom(-55-112, -760-336, 15, 336, 336, colors.BROWN_0, colors.RED_3, 'hall_1')
+            Build.mkRoom(-55-112, -760-336, 15, 112+15, 336, colors.BROWN_0, colors.RED_3, 'wall_3')
+            Build.mkRoom(-55+112-15, -760-336, 15, 112+15, 336, colors.BROWN_0, colors.RED_3, 'wall_3')
+
+            'White door'
+            Build.mkRoom(-55-112+168-13, -760-336-40, 15, 25, 25, colors.WHITE, colors.WHITE, 'background')
+
+            'West Hall'
+            Build.mkRoom(-55-300-1700, -348-112, 15, 300+15+1700, 112, colors.BROWN_0, colors.RED_3, 'hall_2')
+            Build.mkRoom(-55-300-1700-112, -348-112, 15, 112, 112, colors.BROWN_0, colors.BLACK, 'end_2')
+
+            'East Hall'
+            Build.mkRoom(-55+112-15, -348-112, 15, 1000, 112, colors.BROWN_0, colors.RED_3, 'hall_2')
+            if history[8] is False:
+                Build.mkRoom(-55, -348-112, 15, 116, 112, colors.BROWN_0, colors.RED_3, 'wall_2')
+
+            'Rooms'
+            Build.mkRoom(-200, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-400, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-600, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-800, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1000, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1200, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1400, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1600, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1800, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-2000, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+
+            Build.mkRoom(-200, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-400, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-600, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-800, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1000, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1200, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1400, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1600, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-1800, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(-2000, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+
+            Build.mkRoom(-200+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(0+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(200+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(400+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(600+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(800+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(1000+112+160-30, -600, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+
+            Build.mkRoom(-200+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(0+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(200+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(400+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(600+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(800+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+            Build.mkRoom(1000+112+160-30, -368, 15, 160, 160, colors.BROWN_0, colors.RED_4, 'box')
+
+            pg.event.set_blocked(None)
+
+            stage = 12
+
+    if stage is 12:
+        if current_y < -300 and history[13] is False:
+            history[13] = True
+            Text.mkText('Red continued directly down the hall towards his boss room.', mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText("He'd finally discover exactly what he needs to do.", mainFont, colors.WHITE, 18, 2, 2)
+            stage = 13
+
+    if stage is 13:
+        if current_y < -530:
+            Build.mkRoom(-55, -460-6, 15, 112, 112, colors.BROWN_0, colors.RED_3, 'wall_1')
+            all_text = []
+            Text.mkText('Red walked into the next room and discovered the truth.', mainFont, colors.WHITE, 18, 1, 2)
+            stage = 14
+
+        if current_y in range(-460, -340):
+            if current_x < -100 and history[30] is False:
+                history[30] = True
+                all_text = []
+                Text.mkText('Red walked down the West hallway', mainFont, colors.WHITE, 18, 1, 2)
+                Text.mkText('which is also known as the Wrong Hallway.', mainFont, colors.WHITE, 18, 2, 2)
+            if current_x < -400 and history[31] is False:
+                history[31] = True
+                all_text = []
+                Text.mkText('What Red did not know was that this hallway, was in fact,', mainFont, colors.WHITE, 18, 1, 2)
+                Text.mkText('was filled with thousands of extremely venomous spiders.', mainFont, colors.WHITE, 18, 2, 2)
+            if current_x < -700 and history[32] is False:
+                history[32] = True
+                Text.mkText("... and a clown.", mainFont, colors.WHITE, 18, 3, 2)
+
+            if current_x < -1000 and history[33] is False:
+                history[33] = True
+                all_text = []
+                Text.mkText("It is determined that the company's clown detecting device must be dysfunctional.", mainFont, colors.WHITE, 18, 1, 2)
+                Text.mkText("All that's currently in this hallway is Red.", mainFont, colors.WHITE, 18, 2, 2)
+
+            if current_x < -1300 and history[34] is False:
+                history[34] = True
+                all_text = []
+                Text.mkText("Not that Red would have known, but his superiors have been keeping", mainFont, colors.WHITE, 18, 1, 2)
+                Text.mkText("a record on his recent performance. It says: failure.", mainFont, colors.WHITE, 18, 2, 2)
+
+            if current_x < -1600 and history[35] is False:
+                history[35] = True
+                all_text = []
+                Text.mkText("It's odd that someone would take the effort to write 'failure' a thousand times.", mainFont, colors.WHITE, 18, 1, 2)
+                Text.mkText("It's fortunate that Red would have no means of ever discovering these records.", mainFont, colors.WHITE, 18, 2, 2)
+
+            if current_x < -1900 and history[36] is False:
+                history[36] = True
+                all_text = []
+                Text.mkText("This is a pit. Why there's a pit here is nobody's business - except maybe", mainFont, colors.WHITE, 18, 1, 2)
+                Text.mkText("the safety manager. But he fell into the pit last week and now he is no more.", mainFont, colors.WHITE, 18, 2, 2)
+                Text.mkText("Even Red knew the consequences of attempting to walk over a pit.", mainFont, colors.WHITE, 18, 3, 2)
+
+            if current_x > -1700 and history[36] is True and history[37] is False:
+                history[37] = True
+                all_text = []
+
+            if current_x > -300 and history[37] is True and history[38] is False:
+                history[38] = True
+                Text.mkText("Red walked into the North hallway.", mainFont, colors.WHITE, 18, 1, 2)
+
+            if current_x in range(-2060, -2050) and history[36] is True:
+                pg.event.set_allowed(None)
+                all_text = []
+                screen.fill(colors.BLACK)
+                pg.display.flip()
+                Text.mkText("Red's decision was subpar.", mainFont, colors.WHITE, 18, 1, 1)
+                done = True
+
+        if current_y in range(-460, -340) and current_x > 170 and history[40] is False:
+            history[40] = True
+            all_text= []
+            Text.mkText("Wait, that door's not supposed to be open.", mainFont, colors.WHITE, 18, 1, 2)
+
+        if current_y in range(-460, -340) and current_x > 470 and history[41] is False:
+            history[41] = True
+            all_text = []
+            Text.mkText("I'm warning you! Don't go there.", mainFont, colors.WHITE, 18, 1, 2)
+            Text.mkText("If you go any further you're going to break the game!", mainFont, colors.WHITE, 18, 2, 2)
+
+        if current_y in range(-460, -340) and current_x > 770 and history[42] is False:
+            history[42] = True
+            all_text = []
+
+        if current_x > 1000:
+            pg.mixer.music.fadeout(1)
+            stage = 16
+
+    if stage is 14:
+        if current_y < -770:
+            stage = 15
 
     if stage is 15:
         all_text = []
@@ -906,57 +920,58 @@ while not done:
         Text.mkText("And all was good.", mainFont, colors.WHITE, 18, 1, 1)
         done = True
 
-    if stage is 16 and (current_x > 2500 or current_x < -2500 or current_y > 2500 or current_y < -2500):
-        all_text = []
-        all_walls = pg.sprite.Group()
-        all_backgrounds = pg.sprite.Group()
-        all_sprites = pg.sprite.Group()
-        screen.fill(colors.BLACK)
-        World.update()
-        pg.event.set_allowed(None)
+    if stage is 16:
+        if (current_x > 2500 or current_x < -2500 or current_y > 2500 or current_y < -2500):
+            all_text = []
+            all_walls = pg.sprite.Group()
+            all_backgrounds = pg.sprite.Group()
+            all_sprites = pg.sprite.Group()
+            screen.fill(colors.BLACK)
+            World.update()
+            pg.event.set_allowed(None)
 
-        Text.mkText("Red continued walking into the abyss", mainFont, colors.RED_1,  18, 1, 1)
+            Text.mkText("Red continued walking into the abyss", mainFont, colors.RED_1,  18, 1, 1)
 
-        Text.mkText("and he lost track of time.", mainFont, colors.RED_1, 18, 1, 0)
-        Text.mkText("For as far as Red could see, there was nothing here. No offices, no doors, no voices,", mainFont, colors.RED_1, 18, 2, 1)
+            Text.mkText("and he lost track of time.", mainFont, colors.RED_1, 18, 1, 0)
+            Text.mkText("For as far as Red could see, there was nothing here. No offices, no doors, no voices,", mainFont, colors.RED_1, 18, 2, 1)
 
-        Text.mkText("and no walls.", mainFont, colors.RED_1, 18, 1, 1)
+            Text.mkText("and no walls.", mainFont, colors.RED_1, 18, 1, 1)
 
-        Text.mkText("Red was finally free.", mainFont, colors.RED_1, 18, 1, 1)
+            Text.mkText("Red was finally free.", mainFont, colors.RED_1, 18, 1, 1)
 
-        Text.mkText("And all was good.", mainFont, colors.RED_1, 18, 1, 1)
+            Text.mkText("And all was good.", mainFont, colors.RED_1, 18, 1, 1)
 
-        done = True
+            done = True
 
-    if stage is 16 and current_x in range(-10, 20) and current_y in range(-1130, -1110):
-        all_text = []
-        all_walls = pg.sprite.Group()
-        all_backgrounds = pg.sprite.Group()
-        all_sprites = pg.sprite.Group()
-        screen.fill(colors.BLACK)
-        World.music('track_8.mp3')
-        World.update_2()
-        pg.event.set_allowed(None)
+        if current_x in range(-10, 20) and current_y in range(-1130, -1110):
+            all_text = []
+            all_walls = pg.sprite.Group()
+            all_backgrounds = pg.sprite.Group()
+            all_sprites = pg.sprite.Group()
+            screen.fill(colors.BLACK)
+            World.music('track_8.mp3')
+            World.update_2()
+            pg.event.set_allowed(None)
 
-        Text.mkText("It was at this moment that Red realized the truth.", mainFont, colors.RED_1, 18, 1, 1)
+            Text.mkText("It was at this moment that Red realized the truth.", mainFont, colors.RED_1, 18, 1, 1)
 
-        Text.mkText("There was no office, there was no boss,", mainFont, colors.RED_1, 18, 1, 0)
-        Text.mkText("and certainly there was no voice that made decisions for him.", mainFont, colors.RED_1, 18, 2, 1)
+            Text.mkText("There was no office, there was no boss,", mainFont, colors.RED_1, 18, 1, 0)
+            Text.mkText("and certainly there was no voice that made decisions for him.", mainFont, colors.RED_1, 18, 2, 1)
 
-        Text.mkText("The only thing holding himself back this entire time was himself.", mainFont, colors.RED_1, 18, 1, 1)
+            Text.mkText("The only thing holding himself back this entire time was himself.", mainFont, colors.RED_1, 18, 1, 1)
 
-        Text.mkText("All along he, alone, had been the one making these decisions.", mainFont, colors.RED_1, 18, 1, 0)
-        Text.mkText("And there was nothing to fear about making decisions for himself.", mainFont, colors.RED_1, 18, 2, 0)
-        Text.mkText("There was no reason to continue this cycle over and over again.", mainFont, colors.RED_1, 18, 3, 1)
+            Text.mkText("All along he, alone, had been the one making these decisions.", mainFont, colors.RED_1, 18, 1, 0)
+            Text.mkText("And there was nothing to fear about making decisions for himself.", mainFont, colors.RED_1, 18, 2, 0)
+            Text.mkText("There was no reason to continue this cycle over and over again.", mainFont, colors.RED_1, 18, 3, 1)
 
-        Text.mkText("It did not matter if the path he took was unnecessarily long.", mainFont, colors.RED_1, 18, 1, 0)
-        Text.mkText("for it was his path he forged by himself, and he was happy.", mainFont, colors.RED_1, 18, 2, 1)
+            Text.mkText("It did not matter if the path he took was unnecessarily long.", mainFont, colors.RED_1, 18, 1, 0)
+            Text.mkText("for it was his path he forged by himself, and he was happy.", mainFont, colors.RED_1, 18, 2, 1)
 
-        Text.mkText("Satisfied at his epiphany, Red escaped through the white door.", mainFont, colors.RED_1, 18, 1, 1)
+            Text.mkText("Satisfied at his epiphany, Red escaped through the white door.", mainFont, colors.RED_1, 18, 1, 1)
 
-        Text.mkText("And all was good.", mainFont, colors.RED_1, 18, 1, 1)
+            Text.mkText("And all was good.", mainFont, colors.RED_1, 18, 1, 1)
 
-        done = True
+            done = True
 
     # Here are the list of captions in the game.
     if pg.key.get_pressed()[pg.K_SPACE] is 1:
