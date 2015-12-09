@@ -1,10 +1,10 @@
+
 ############
 #Made by VacRom for CS1113
 #############
 
 import pygame as pg
 import colors
-
 
 # Actor represents all the players that are in the game.
 class Actor(pg.sprite.Sprite):
@@ -308,6 +308,24 @@ class Build(object):
 
 # The World class updates the global state of the game. This includes
 # drawing the world as well as managing the music.
+
+class Circle(object):
+    def __init__(self, color, x, y, radius, thickness):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.radius = radius
+        self.thickness = thickness
+        circle = [self.color, self.x, self.y, self.radius, self.thickness]
+        all_circles.append(circle)
+
+    def update():
+        for n in range(len(all_circles)):
+            all_circles[n][1] += dx
+            all_circles[n][2] += dy
+            pg.draw.circle(screen, all_circles[n][0], (all_circles[n][1], all_circles[n][2]), all_circles[n][3], all_circles[n][4])
+
+
 class World():
     def __init__():
         pass
@@ -319,6 +337,7 @@ class World():
         screen.fill(colors.BLACK)
         all_backgrounds.draw(screen)
         all_walls.draw(screen)
+        Circle.update()
         all_actors.draw(screen)
         Text.update()
         pg.display.flip()
@@ -348,16 +367,17 @@ all_actors = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
 all_textBorder = pg.sprite.Group()
 all_textBox = pg.sprite.Group()
+all_circles = []
 all_text = []
 all_caption = []
 
-history = [False]
+history = [False, False]
 stage = 0
 
 screen_x = 900
 screen_y = 600
-initial_x = 500+5
-initial_y = 500+5
+initial_x = 0
+initial_y = 0
 player_size = 25
 
 mainFont = pg.font.SysFont('oldstandard', 18)
@@ -384,8 +404,8 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
-#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
 pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 clock = pg.time.Clock()
@@ -401,10 +421,44 @@ while not done:
             done = True
 
 # Begin the story here.
+    if history[0] is False:
+        history[0] = True
+
+        # Rotunda
+        Circle((255, 255, 255), 450, -100, 300, 0)
+        Build(-350, -825, 15, 700, 800, (205, 205, 205), (150, 150, 150), 'box')
+        Build(-750, -225, 15, 400, 200, (205, 205, 205), (150, 150, 150), 'box')
+        Build(350, -225, 15, 400, 200, (205, 205, 205), (150, 150, 150), 'box')
+
+        # Side paths
+        Build(-550, -25, 15, 50, 1600, colors.BROWN, colors.BROWN, 'background')
+        Build(500, -25, 15, 50, 1600, colors.BROWN, colors.BROWN, 'background')
+
+        # Lawn and paths
+        Build(-500, -25, 15, 1000, 500, (20, 150, 20), (20, 150, 20), 'background')
+        Build(-500, 475, 15, 1000, 50, colors.BROWN, colors.BROWN, 'background')
+        Build(-500, 525, 15, 1000, 200, (20, 150, 20), (20, 150, 20), 'background')
+        Build(-500, 725, 15, 1000, 50, colors.BROWN, colors.BROWN, 'background')
+        Build(-500, 775, 15, 1000, 600, (20, 150, 20), (20, 150, 20), 'background')
+
+        # Building on side
+        Build(-750, -25, 15, 200, 200, (130, 100, 100), (150, 150, 180), 'box')
+        Build(-750, 175, 15, 200, 200, (125, 95, 95), (145, 145, 185), 'box')
+        Build(-850, 375, 15, 300, 450, (150, 80, 80), (160, 40, 40), 'box')
+        Build(-700, 825, 15, 150, 600, (160, 180, 160), (140, 120, 120), 'box')
+
+        Build(550, -25, 15, 200, 200, (130, 100, 100), (150, 150, 180), 'box')
+        Build(550, 175, 15, 200, 200, (125, 95, 95), (145, 145, 185), 'box')
+        Build(550, 375, 15, 300, 450, (150, 80, 80), (160, 40, 40), 'box')
+        Build(550, 825, 15, 150, 600, (160, 180, 160), (140, 120, 120), 'box')
+
+        Text("Welcome to the Rotunda, at UVA.", mainFont, colors.WHITE, 18, 1, 2)
+
+    if current_y > 200 and history[1] is False:
+        history[1] = True
+        all_text = []
 
 
-    # This determines the player motion by scrolling all nonActors on
-    # the screen in the opposite direction.
     if hitWall is False:
         if pg.key.get_pressed()[pg.K_LEFT] is 0 or pg.key.get_pressed()[pg.K_RIGHT] is 0:
             dx = 0
@@ -437,5 +491,7 @@ while not done:
 
     World.update()
     clock.tick(60)
+
+    print(current_x, current_y)
 
 pg.quit()
