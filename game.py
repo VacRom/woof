@@ -344,7 +344,7 @@ all_caption = []
 
 history = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-stage = 1
+stage = 0
 
 screen_x = 900
 screen_y = 600
@@ -375,8 +375,8 @@ all_textBorder.add(textBorder)
 textBox = TextBox(colors.BLACK)
 all_textBox.add(textBox)
 
-screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
-#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
+#screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF)
+screen = pg.display.set_mode([screen_x, screen_y], pg.DOUBLEBUF | pg.NOFRAME | pg.FULLSCREEN)
 pg.display.set_caption(str(stage)+' '+str(current_x)+' '+str(current_y))
 
 clock = pg.time.Clock()
@@ -407,7 +407,7 @@ while not done:
             Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
             World.update()
 
-            Text.mkText('Here is his office. It is his very own, and he is very glad to be in it.', mainFont, colors.WHITE, 18, 3, 1)
+            Text.mkText("Here is his office. It's his very own, and he is very glad to be in it.", mainFont, colors.WHITE, 18, 3, 1)
 
             Text.mkText('For an uncountable number of days, Red sat in this office', mainFont, colors.WHITE, 18, 1, 0)
             Text.mkText('completing a number of different assignments.', mainFont, colors.WHITE, 18, 2, 1)
