@@ -418,7 +418,7 @@ while not done:
             Text('This is the story of Red.', mainFont, colors.WHITE, 18, 1, 0)
             Text('Red is a simple shape, and he leads a simple life.', mainFont, colors.WHITE, 18, 2, 0)
 
-            Build.mkRoom(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
+            Build(0, 0, 15, 160, 160, colors.BROWN_0, colors.BROWN, 'box')
             World.update()
 
             Text("Here is his office. It's his very own, and he is very glad to be in it.", mainFont, colors.WHITE, 18, 3, 1)
